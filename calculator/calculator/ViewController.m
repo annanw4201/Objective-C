@@ -9,16 +9,28 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
+@property (nonatomic) BOOL enteringNumber;
 @end
 
 @implementation ViewController
+@synthesize display;
+@synthesize enteringNumber;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (IBAction)digitPressed:(id)sender {
+    NSString *digit = [sender currentTitle];
+    if (enteringNumber) {
+        [self.display setText:[self.display.text stringByAppendingString:digit]];
+    }
+    else {
+        [self.display setText:[sender currentTitle]];
+        enteringNumber = YES;
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
