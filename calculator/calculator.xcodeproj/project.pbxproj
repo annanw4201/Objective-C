@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F77BECC200084680078D039 /* calculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F77BECB200084680078D039 /* calculatorBrain.m */; };
 		0FBE416B1FFF583400EF0FC0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBE416A1FFF583400EF0FC0 /* AppDelegate.m */; };
 		0FBE416E1FFF583400EF0FC0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBE416D1FFF583400EF0FC0 /* ViewController.m */; };
 		0FBE41711FFF583400EF0FC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FBE416F1FFF583400EF0FC0 /* Main.storyboard */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F77BECA200084680078D039 /* calculatorBrain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = calculatorBrain.h; sourceTree = "<group>"; };
+		0F77BECB200084680078D039 /* calculatorBrain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = calculatorBrain.m; sourceTree = "<group>"; };
 		0FBE41661FFF583400EF0FC0 /* calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FBE41691FFF583400EF0FC0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0FBE416A1FFF583400EF0FC0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 				0FBE41741FFF583400EF0FC0 /* LaunchScreen.storyboard */,
 				0FBE41771FFF583400EF0FC0 /* Info.plist */,
 				0FBE41781FFF583400EF0FC0 /* main.m */,
+				0F77BECA200084680078D039 /* calculatorBrain.h */,
+				0F77BECB200084680078D039 /* calculatorBrain.m */,
 			);
 			path = calculator;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 				0FBE416E1FFF583400EF0FC0 /* ViewController.m in Sources */,
 				0FBE41791FFF583400EF0FC0 /* main.m in Sources */,
 				0FBE416B1FFF583400EF0FC0 /* AppDelegate.m in Sources */,
+				0F77BECC200084680078D039 /* calculatorBrain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
