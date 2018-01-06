@@ -11,13 +11,16 @@
 
 @interface ViewController ()
 @property (nonatomic) BOOL enteringNumber;
+@property (nonatomic) BOOL enteringFloatingNumber;
 @property (nonatomic, strong) calculatorBrain *brain;
 @end
 
 @implementation ViewController
-@synthesize display = _display;
+
+@synthesize resultDisplay = _resultDisplay;
 @synthesize enteringNumber = _enteringNumber;
 @synthesize brain = _brain;
+@synthesize enteringFloatingNumber = _enteringFloatingNumber;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,29 +37,55 @@
 - (IBAction)digitPressed:(UIButton *)sender {
     NSString *digit = [sender currentTitle];
     if (self.enteringNumber) {
-        [self.display setText:[self.display.text stringByAppendingString:digit]];
+        [self.resultDisplay setText:[self.resultDisplay.text stringByAppendingString:digit]];
     }
     else {
-        [self.display setText:[sender currentTitle]];
+        [self.resultDisplay setText:[sender currentTitle]];
         if (![digit isEqualToString:@"0"]) {
             self.enteringNumber = YES;
         }
     }
 }
 
+- (IBAction)floatPressed:(UIButton *)sender {
+    if (self.enteringNumber && !self.enteringFloatingNumber) {
+        NSString *text = [self.resultDisplay.text stringByAppendingString:@"."];
+        [self.resultDisplay setText:text];
+        self.enteringFloatingNumber = YES;
+    }
+    else if (!self.enteringNumber && !self.enteringFloatingNumber) {
+        [self.resultDisplay setText:@"0."];
+        self.enteringFloatingNumber = YES;
+        self.enteringNumber = YES;
+    }
+}
+
+
 - (IBAction)operationPressed:(UIButton *)sender {
     if (self.enteringNumber) {
         [self enterPressed];
     }
     NSString *operation = [sender currentTitle];
+    [self.expressionDisplay setText: [self.expressionDisplay.text stringByAppendingString:[NSString stringWithFormat:@"%@ ", operation]]];
     double result = [self.brain performOperation:operation];
-    [self.display setText:[NSString stringWithFormat:@"%g", result]];
+    [self.resultDisplay setText:[NSString stringWithFormat:@"%g", result]];
 }
 
 - (IBAction)enterPressed {
-    [self.brain pushOperand:[self.display.text doubleValue]];
+    [self.brain pushOperand:[self.resultDisplay.text doubleValue]];
+    [self.expressionDisplay setText:[self.expressionDisplay.text stringByAppendingString: [NSString stringWithFormat:@"%@ ", self.resultDisplay.text]]];
     self.enteringNumber = NO;
+    self.enteringFloatingNumber = NO;
 }
+
+- (IBAction)clearPressed:(UIButton *)sender {
+    [self.resultDisplay setText:@"0"];
+    [self.expressionDisplay setText:@""];
+    self.enteringNumber = NO;
+    self.enteringFloatingNumber = NO;
+    [self.brain clearState];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
