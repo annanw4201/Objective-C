@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0F77BEDB2002A6450078D039 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F77BEDA2002A6450078D039 /* AppDelegate.m */; };
-		0F77BEDE2002A6450078D039 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F77BEDD2002A6450078D039 /* ViewController.m */; };
 		0F77BEE12002A6450078D039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F77BEDF2002A6450078D039 /* Main.storyboard */; };
 		0F77BEE32002A6450078D039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F77BEE22002A6450078D039 /* Assets.xcassets */; };
 		0F77BEE62002A6450078D039 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F77BEE42002A6450078D039 /* LaunchScreen.storyboard */; };
 		0F77BEE92002A6450078D039 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F77BEE82002A6450078D039 /* main.m */; };
 		0F77BEF32002A6450078D039 /* programmable_calculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F77BEF22002A6450078D039 /* programmable_calculatorTests.m */; };
 		0F77BEFE2002A6450078D039 /* programmable_calculatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F77BEFD2002A6450078D039 /* programmable_calculatorUITests.m */; };
+		0F77BF152002A9200078D039 /* calculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F77BF112002A9200078D039 /* calculatorBrain.m */; };
+		0F77BF162002A9200078D039 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F77BF132002A9200078D039 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +39,6 @@
 		0F77BED62002A6450078D039 /* programmable calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "programmable calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F77BED92002A6450078D039 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0F77BEDA2002A6450078D039 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0F77BEDC2002A6450078D039 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0F77BEDD2002A6450078D039 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0F77BEE02002A6450078D039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F77BEE22002A6450078D039 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F77BEE52002A6450078D039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +50,10 @@
 		0F77BEF92002A6450078D039 /* programmable calculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "programmable calculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F77BEFD2002A6450078D039 /* programmable_calculatorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = programmable_calculatorUITests.m; sourceTree = "<group>"; };
 		0F77BEFF2002A6450078D039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F77BF112002A9200078D039 /* calculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calculatorBrain.m; sourceTree = "<group>"; };
+		0F77BF122002A9200078D039 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0F77BF132002A9200078D039 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0F77BF142002A9200078D039 /* calculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calculatorBrain.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,13 +106,15 @@
 			children = (
 				0F77BED92002A6450078D039 /* AppDelegate.h */,
 				0F77BEDA2002A6450078D039 /* AppDelegate.m */,
-				0F77BEDC2002A6450078D039 /* ViewController.h */,
-				0F77BEDD2002A6450078D039 /* ViewController.m */,
 				0F77BEDF2002A6450078D039 /* Main.storyboard */,
 				0F77BEE22002A6450078D039 /* Assets.xcassets */,
 				0F77BEE42002A6450078D039 /* LaunchScreen.storyboard */,
 				0F77BEE72002A6450078D039 /* Info.plist */,
 				0F77BEE82002A6450078D039 /* main.m */,
+				0F77BF142002A9200078D039 /* calculatorBrain.h */,
+				0F77BF112002A9200078D039 /* calculatorBrain.m */,
+				0F77BF122002A9200078D039 /* ViewController.h */,
+				0F77BF132002A9200078D039 /* ViewController.m */,
 			);
 			path = "programmable calculator";
 			sourceTree = "<group>";
@@ -265,8 +270,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F77BEDE2002A6450078D039 /* ViewController.m in Sources */,
+				0F77BF152002A9200078D039 /* calculatorBrain.m in Sources */,
 				0F77BEE92002A6450078D039 /* main.m in Sources */,
+				0F77BF162002A9200078D039 /* ViewController.m in Sources */,
 				0F77BEDB2002A6450078D039 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
