@@ -83,14 +83,14 @@
         [self enterPressed];
     }
     NSString *operation = [sender currentTitle];
-    [self.expressionDisplay setText: [self.expressionDisplay.text stringByAppendingString:[NSString stringWithFormat:@"%@ ", operation]]];
     double result = [self.brain performOperation:operation];
     [self.resultDisplay setText:[NSString stringWithFormat:@"%g", result]];
+    [self.expressionDisplay setText: [calculatorBrain descriptionOfProgram:self.brain.program]];
 }
 
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.resultDisplay.text doubleValue]];
-    [self.expressionDisplay setText:[self.expressionDisplay.text stringByAppendingString: [NSString stringWithFormat:@"%@ ", self.resultDisplay.text]]];
+    [self.expressionDisplay setText: [calculatorBrain descriptionOfProgram:self.brain.program]];
     self.enteringNumber = NO;
     self.enteringFloatingNumber = NO;
     self.leadingZero = NO;
@@ -109,9 +109,9 @@
     if (self.enteringNumber) {
         [self enterPressed];
     }
-    
+    [self.brain pushVariable:[sender currentTitle]];
+    [self.expressionDisplay setText: [calculatorBrain descriptionOfProgram:self.brain.program]];
     self.enteringVariable = YES;
-    
 }
 
 
