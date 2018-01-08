@@ -19,4 +19,6 @@
 + (NSString *)descriptionOfProgram:(id)program;
 + (double) runProgram:(id)program usingVariableValues: (NSDictionary *)variableDict;
 + (NSSet *)variablesUsedInProgram: (id)program;
+- (void)undoLastItemInStack;
+- (double)calculate;
 @end

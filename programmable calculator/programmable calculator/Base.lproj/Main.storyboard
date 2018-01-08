@@ -208,6 +208,14 @@
                                     <action selector="variablePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QyR-Pr-RJ5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7L-45-ucN">
+                                <rect key="frame" x="192" y="402" width="80" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Undo"/>
+                                <connections>
+                                    <action selector="undoPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aed-1g-QR2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

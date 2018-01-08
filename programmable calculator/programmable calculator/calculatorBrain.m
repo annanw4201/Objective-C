@@ -51,7 +51,7 @@
 }
 
 - (double)performOperation:(NSString *)operation {
-    [self.programStack addObject:operation];
+    if (operation) [self.programStack addObject:operation];
     //return [calculatorBrain runProgram:self.programStack];
     return [calculatorBrain runProgram:self.program usingVariableValues:self.variableDict];
 }
@@ -206,6 +206,14 @@
     }
     if ([set count] == 0) set = nil;
     return set;
+}
+
+- (void)undoLastItemInStack {
+    [self.programStack removeLastObject];
+}
+
+- (double)calculate {
+    return [calculatorBrain runProgram:self.program usingVariableValues:self.variableDict];
 }
 
 @end
