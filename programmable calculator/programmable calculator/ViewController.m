@@ -79,9 +79,7 @@
 }
 
 - (IBAction)operationPressed:(UIButton *)sender {
-    if (self.enteringNumber) {
-        [self enterPressed];
-    }
+    [self enterPressed];
     NSString *operation = [sender currentTitle];
     double result = [self.brain performOperation:operation];
     [self.resultDisplay setText:[NSString stringWithFormat:@"%g", result]];
