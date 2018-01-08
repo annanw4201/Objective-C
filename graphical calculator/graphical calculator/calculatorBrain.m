@@ -118,7 +118,7 @@
         if ([stack count] > 0) {
             description = [description stringByAppendingString:@","];
         }
-        NSLog(@"--%@", [NSString stringWithFormat:@"descrip: %@", description]);
+        //NSLog(@"--%@", [NSString stringWithFormat:@"descrip: %@", description]);
     }
     return  description;
 }
@@ -206,7 +206,7 @@
     for (id obj in program) {
         if ([obj isKindOfClass:[NSString class]]) {
             [set addObject:obj];
-            NSLog(@"obj: %@", obj);
+            //NSLog(@"obj: %@", obj);
         }
     }
     if ([set count] == 0) set = nil;
