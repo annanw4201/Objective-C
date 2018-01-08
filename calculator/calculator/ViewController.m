@@ -77,7 +77,7 @@
 }
 
 - (IBAction)operationPressed:(UIButton *)sender {
-    if (self.enteringNumber && ![[sender currentTitle] isEqualToString:@"π"]) {
+    if (self.enteringNumber) {
         [self enterPressed];
     }
     NSString *operation = [sender currentTitle];
