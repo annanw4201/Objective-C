@@ -18,6 +18,9 @@
 		0F05E903200421E600D3DB90 /* graphical_calculatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E902200421E600D3DB90 /* graphical_calculatorUITests.m */; };
 		0F05E912200422CC00D3DB90 /* calculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E910200422CC00D3DB90 /* calculatorBrain.m */; };
 		0F05E91520042EEA00D3DB90 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F05E91320042EEA00D3DB90 /* iPad.storyboard */; };
+		0F05E91A2004335700D3DB90 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E9192004335700D3DB90 /* GraphViewController.m */; };
+		0F05E91D2004338000D3DB90 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E91C2004338000D3DB90 /* GraphView.m */; };
+		0F05E926200436DF00D3DB90 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E925200436DF00D3DB90 /* AxesDrawer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,12 @@
 		0F05E910200422CC00D3DB90 /* calculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calculatorBrain.m; sourceTree = "<group>"; };
 		0F05E911200422CC00D3DB90 /* calculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calculatorBrain.h; sourceTree = "<group>"; };
 		0F05E91420042EEA00D3DB90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/iPad.storyboard; sourceTree = "<group>"; };
+		0F05E9182004335700D3DB90 /* GraphViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
+		0F05E9192004335700D3DB90 /* GraphViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
+		0F05E91B2004338000D3DB90 /* GraphView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		0F05E91C2004338000D3DB90 /* GraphView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		0F05E924200436DF00D3DB90 /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AxesDrawer.h; path = AxesDrawer/AxesDrawer.h; sourceTree = SOURCE_ROOT; };
+		0F05E925200436DF00D3DB90 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AxesDrawer.m; path = AxesDrawer/AxesDrawer.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +97,7 @@
 		0F05E8CF200421E600D3DB90 = {
 			isa = PBXGroup;
 			children = (
+				0F05E9202004363E00D3DB90 /* AxesDrawer */,
 				0F05E8DA200421E600D3DB90 /* graphical calculator */,
 				0F05E8F6200421E600D3DB90 /* graphical calculatorTests */,
 				0F05E901200421E600D3DB90 /* graphical calculatorUITests */,
@@ -114,6 +124,10 @@
 				0F05E8DF200421E600D3DB90 /* ViewController.m */,
 				0F05E911200422CC00D3DB90 /* calculatorBrain.h */,
 				0F05E910200422CC00D3DB90 /* calculatorBrain.m */,
+				0F05E9182004335700D3DB90 /* GraphViewController.h */,
+				0F05E9192004335700D3DB90 /* GraphViewController.m */,
+				0F05E91B2004338000D3DB90 /* GraphView.h */,
+				0F05E91C2004338000D3DB90 /* GraphView.m */,
 				0F05E91320042EEA00D3DB90 /* iPad.storyboard */,
 				0F05E8E1200421E600D3DB90 /* iPhone.storyboard */,
 				0F05E8E9200421E600D3DB90 /* LaunchScreen.storyboard */,
@@ -141,6 +155,16 @@
 				0F05E904200421E600D3DB90 /* Info.plist */,
 			);
 			path = "graphical calculatorUITests";
+			sourceTree = "<group>";
+		};
+		0F05E9202004363E00D3DB90 /* AxesDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				0F05E924200436DF00D3DB90 /* AxesDrawer.h */,
+				0F05E925200436DF00D3DB90 /* AxesDrawer.m */,
+			);
+			name = AxesDrawer;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,11 +301,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F05E926200436DF00D3DB90 /* AxesDrawer.m in Sources */,
 				0F05E8E6200421E600D3DB90 /* graphical_calculator.xcdatamodeld in Sources */,
 				0F05E8E0200421E600D3DB90 /* ViewController.m in Sources */,
 				0F05E8EE200421E600D3DB90 /* main.m in Sources */,
 				0F05E8DD200421E600D3DB90 /* AppDelegate.m in Sources */,
+				0F05E91D2004338000D3DB90 /* GraphView.m in Sources */,
 				0F05E912200422CC00D3DB90 /* calculatorBrain.m in Sources */,
+				0F05E91A2004335700D3DB90 /* GraphViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
