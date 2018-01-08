@@ -16,6 +16,7 @@
 		0F05E8EE200421E600D3DB90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E8ED200421E600D3DB90 /* main.m */; };
 		0F05E8F8200421E600D3DB90 /* graphical_calculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E8F7200421E600D3DB90 /* graphical_calculatorTests.m */; };
 		0F05E903200421E600D3DB90 /* graphical_calculatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E902200421E600D3DB90 /* graphical_calculatorUITests.m */; };
+		0F05E912200422CC00D3DB90 /* calculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E910200422CC00D3DB90 /* calculatorBrain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		0F05E8FE200421E600D3DB90 /* graphical calculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "graphical calculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F05E902200421E600D3DB90 /* graphical_calculatorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = graphical_calculatorUITests.m; sourceTree = "<group>"; };
 		0F05E904200421E600D3DB90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F05E910200422CC00D3DB90 /* calculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calculatorBrain.m; sourceTree = "<group>"; };
+		0F05E911200422CC00D3DB90 /* calculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calculatorBrain.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 				0F05E8DC200421E600D3DB90 /* AppDelegate.m */,
 				0F05E8DE200421E600D3DB90 /* ViewController.h */,
 				0F05E8DF200421E600D3DB90 /* ViewController.m */,
+				0F05E911200422CC00D3DB90 /* calculatorBrain.h */,
+				0F05E910200422CC00D3DB90 /* calculatorBrain.m */,
 				0F05E8E1200421E600D3DB90 /* Main.storyboard */,
 				0F05E8E7200421E600D3DB90 /* Assets.xcassets */,
 				0F05E8E9200421E600D3DB90 /* LaunchScreen.storyboard */,
@@ -272,6 +277,7 @@
 				0F05E8E0200421E600D3DB90 /* ViewController.m in Sources */,
 				0F05E8EE200421E600D3DB90 /* main.m in Sources */,
 				0F05E8DD200421E600D3DB90 /* AppDelegate.m in Sources */,
+				0F05E912200422CC00D3DB90 /* calculatorBrain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
