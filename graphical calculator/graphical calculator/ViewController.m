@@ -103,6 +103,7 @@
 - (IBAction)clearPressed:(UIButton *)sender {
     [self.resultDisplay setText:@"0"];
     [self.expressionDisplay setText:@""];
+    [self.variableDisplay setText:@""];
     self.enteringNumber = NO;
     self.enteringFloatingNumber = NO;
     self.leadingZero = NO;
