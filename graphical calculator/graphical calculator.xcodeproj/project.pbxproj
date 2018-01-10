@@ -20,7 +20,7 @@
 		0F05E91520042EEA00D3DB90 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F05E91320042EEA00D3DB90 /* iPad.storyboard */; };
 		0F05E91A2004335700D3DB90 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E9192004335700D3DB90 /* GraphViewController.m */; };
 		0F05E91D2004338000D3DB90 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E91C2004338000D3DB90 /* GraphView.m */; };
-		0F05E926200436DF00D3DB90 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E925200436DF00D3DB90 /* AxesDrawer.m */; };
+		0F83C6ED2005CD7B00E6EB56 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F83C6EC2005CD7B00E6EB56 /* AxesDrawer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +65,8 @@
 		0F05E9192004335700D3DB90 /* GraphViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		0F05E91B2004338000D3DB90 /* GraphView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
 		0F05E91C2004338000D3DB90 /* GraphView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
-		0F05E924200436DF00D3DB90 /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AxesDrawer.h; path = AxesDrawer/AxesDrawer.h; sourceTree = SOURCE_ROOT; };
-		0F05E925200436DF00D3DB90 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AxesDrawer.m; path = AxesDrawer/AxesDrawer.m; sourceTree = SOURCE_ROOT; };
+		0F83C6EB2005CD7B00E6EB56 /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxesDrawer.h; sourceTree = "<group>"; };
+		0F83C6EC2005CD7B00E6EB56 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +97,7 @@
 		0F05E8CF200421E600D3DB90 = {
 			isa = PBXGroup;
 			children = (
-				0F05E9202004363E00D3DB90 /* AxesDrawer */,
+				0F83C6E72005CD4A00E6EB56 /* AxesDrawer */,
 				0F05E8DA200421E600D3DB90 /* graphical calculator */,
 				0F05E8F6200421E600D3DB90 /* graphical calculatorTests */,
 				0F05E901200421E600D3DB90 /* graphical calculatorUITests */,
@@ -157,14 +157,13 @@
 			path = "graphical calculatorUITests";
 			sourceTree = "<group>";
 		};
-		0F05E9202004363E00D3DB90 /* AxesDrawer */ = {
+		0F83C6E72005CD4A00E6EB56 /* AxesDrawer */ = {
 			isa = PBXGroup;
 			children = (
-				0F05E924200436DF00D3DB90 /* AxesDrawer.h */,
-				0F05E925200436DF00D3DB90 /* AxesDrawer.m */,
+				0F83C6EB2005CD7B00E6EB56 /* AxesDrawer.h */,
+				0F83C6EC2005CD7B00E6EB56 /* AxesDrawer.m */,
 			);
-			name = AxesDrawer;
-			path = "New Group";
+			path = AxesDrawer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,7 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F05E926200436DF00D3DB90 /* AxesDrawer.m in Sources */,
+				0F83C6ED2005CD7B00E6EB56 /* AxesDrawer.m in Sources */,
 				0F05E8E6200421E600D3DB90 /* graphical_calculator.xcdatamodeld in Sources */,
 				0F05E8E0200421E600D3DB90 /* ViewController.m in Sources */,
 				0F05E8EE200421E600D3DB90 /* main.m in Sources */,
