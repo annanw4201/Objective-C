@@ -264,6 +264,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sTY-uR-QFW"/>
                     </view>
+                    <connections>
+                        <outlet property="graphView" destination="l2F-Jd-ToW" id="3Bg-dI-MaL"/>
+                        <outlet property="view" destination="l2F-Jd-ToW" id="yjv-hj-SNc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WSY-2q-2gX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,16 +7,46 @@
 //
 
 #import "GraphViewController.h"
+#import "GraphView.h"
 
-@interface GraphViewController ()
-
+@interface GraphViewController () <graphViewData>
+@property (weak, nonatomic) IBOutlet GraphView *graphView;
 @end
 
 @implementation GraphViewController
+@synthesize scale = _scale;
+@synthesize origin = _origin;
+@synthesize graphView = _graphView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+-(CGFloat)scale {
+    if (!_scale) _scale = 50.0f;
+    return _scale;
+}
+
+- (void)setScale:(CGFloat)scale {
+    _scale = scale;
+    [self.graphView setNeedsDisplay];
+}
+
+- (void)setOrigin:(CGPoint)origin {
+    _origin = origin;
+    [self.graphView setNeedsDisplay];
+}
+
+- (void)setGraphView:(GraphView *)graphView {
+    _graphView = graphView;
+    [graphView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pinch:)]];
+    [graphView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pan:)]];
+    graphView.data = self;
+    CGPoint center = CGPointMake(self.graphView.bounds.size.width / 2, self.graphView.bounds.size.height / 2);
+    _origin = center;
+    [self.graphView setNeedsDisplay];
+    NSLog(@"set graph view");
 }
 
 - (void)didReceiveMemoryWarning {
