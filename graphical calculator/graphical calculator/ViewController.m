@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "calculatorBrain.h"
+#import "GraphViewController.h"
 
 @interface ViewController ()
 @property (nonatomic) BOOL enteringNumber;
@@ -78,12 +79,8 @@
     }
 }
 
-- (BOOL)unaryOperator: (NSString *)operator {
-    return [operator isEqualToString:@"sin"] || [operator isEqualToString:@"cos"] || [operator isEqualToString:@"sqrt"];
-}
-
 - (IBAction)operationPressed:(UIButton *)sender {
-    if (self.enteringNumber || [self unaryOperator:[sender currentTitle]]) {
+    if (self.enteringNumber) {
         [self enterPressed];
     }
     NSString *operation = [sender currentTitle];
@@ -93,7 +90,9 @@
 }
 
 - (IBAction)enterPressed {
-    [self.brain pushOperand:[self.resultDisplay.text doubleValue]];
+    if (![self.resultDisplay.text isEqualToString:@"x"]) {
+        [self.brain pushOperand:[self.resultDisplay.text doubleValue]];
+    }
     [self.expressionDisplay setText: [calculatorBrain descriptionOfProgram:self.brain.program]];
     self.enteringNumber = NO;
     self.enteringFloatingNumber = NO;
@@ -116,6 +115,7 @@
     }
     [self.brain pushVariable:[sender currentTitle]];
     [self.expressionDisplay setText: [calculatorBrain descriptionOfProgram:self.brain.program]];
+    /*
     NSString *variableText = @"";
     NSSet *variableSet = [calculatorBrain variablesUsedInProgram:[self.brain program]];
     NSDictionary *variableDict = [self.brain variables];
@@ -125,6 +125,8 @@
         }
     }
     [self.variableDisplay setText:variableText];
+     */
+    [self.resultDisplay setText:[sender currentTitle]];
     self.enteringVariable = YES;
 }
 
@@ -150,6 +152,12 @@
         double result = [self.brain calculate];
         [self.resultDisplay setText:[NSString stringWithFormat:@"%g", result]];
         [self.expressionDisplay setText: [calculatorBrain descriptionOfProgram:self.brain.program]];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showGraph"]) {
+        [segue.destinationViewController setProgram:self.brain.program];
     }
 }
 

@@ -177,11 +177,13 @@
 }
 
 - (void)pushVariable:(NSString *)variable {
+    /*
     NSNumber *value = nil;
     if ([variable isEqualToString:@"x"]) value = [NSNumber numberWithInt:3];
     else if ([variable isEqualToString:@"y"]) value = [NSNumber numberWithInt:6];
+    */
     [self.programStack addObject:variable];
-    [self.variableDict setObject:value forKey:variable];
+    [self.variableDict setObject:variable forKey:variable];
 }
 
 + (double) runProgram:(id)program usingVariableValues:(NSDictionary *)variableDict {

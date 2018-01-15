@@ -8,6 +8,7 @@
 
 #import "GraphViewController.h"
 #import "GraphView.h"
+#import "calculatorBrain.h"
 
 @interface GraphViewController () <graphViewData>
 @property (weak, nonatomic) IBOutlet GraphView *graphView;
@@ -36,6 +37,16 @@
 - (void)setOrigin:(CGPoint)origin {
     _origin = origin;
     [self.graphView setNeedsDisplay];
+}
+
+- (void)setProgram:(id)program {
+    _program = program;
+    
+}
+
+- (double)yValueOfx:(CGFloat)xValue {
+    NSDictionary *variableDict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithFloat:xValue], @"x", nil];
+    return [calculatorBrain runProgram:self.program usingVariableValues:variableDict];
 }
 
 - (void)setGraphView:(GraphView *)graphView {

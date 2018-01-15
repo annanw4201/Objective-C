@@ -247,7 +247,7 @@
             </objects>
             <point key="canvasLocation" x="456.80000000000001" y="117.39130434782609"/>
         </scene>
-        <!--Graph View Controller-->
+        <!--Graph-->
         <scene sceneID="sMp-fh-p6L">
             <objects>
                 <viewController id="Z6S-Tb-NcQ" customClass="GraphViewController" sceneMemberID="viewController">
@@ -264,6 +264,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sTY-uR-QFW"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Graph" id="XMt-w8-rJH"/>
                     <connections>
                         <outlet property="graphView" destination="l2F-Jd-ToW" id="3Bg-dI-MaL"/>
                         <outlet property="view" destination="l2F-Jd-ToW" id="yjv-hj-SNc"/>

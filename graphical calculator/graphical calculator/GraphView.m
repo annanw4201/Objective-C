@@ -47,11 +47,34 @@
     [self setUp];
 }
 
+- (CGFloat)yPointToPixel:(double)yPoint withOrigin:(CGPoint)origin usingScale:(CGFloat)scale {
+    return origin.y - yPoint * scale;
+}
+
+- (CGFloat)xPixelToPoint:(CGFloat)xPixel withOrigin:(CGPoint)origin usingScale:(CGFloat)scale {
+    return (xPixel - origin.x) / scale;
+}
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    [AxesDrawer drawAxesInRect:rect originAtPoint:self.data.origin scale:self.data.scale];
+    CGPoint origin = self.data.origin;
+    CGFloat scale = self.data.scale;
+    
+    [AxesDrawer drawAxesInRect:rect originAtPoint:origin scale:scale];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextStrokePath(context);
+    [[UIColor redColor] setFill];
+    CGFloat widthPixels = rect.size.width;
+    for (CGFloat xPixel = 0.0f; xPixel < widthPixels; xPixel += 1 / self.contentScaleFactor) {
+        double yValue = [self.data yValueOfx:[self xPixelToPoint:xPixel withOrigin:origin usingScale:scale]];
+        CGFloat yPixel = [self yPointToPixel:yValue withOrigin:origin usingScale:scale];
+        //NSLog(@"x and y: %f, %f", [self xPixelToPoint:xPixel withOrigin:origin usingScale:scale], yPixel);
+        CGContextFillRect(context, CGRectMake(xPixel, yPixel, 1.0, 1.0));
+    }
 }
 
 

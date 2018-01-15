@@ -11,6 +11,7 @@
 @protocol graphViewData
 @property (nonatomic) CGFloat scale;
 @property (nonatomic) CGPoint origin;
+- (double)yValueOfx:(CGFloat)xValue;
 @end
 
 @interface GraphView : UIView
