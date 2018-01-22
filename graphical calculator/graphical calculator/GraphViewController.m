@@ -41,7 +41,7 @@
 
 - (void)setProgram:(id)program {
     _program = program;
-    
+    [self.graphView setNeedsDisplay];
 }
 
 - (double)yValueOfx:(CGFloat)xValue {

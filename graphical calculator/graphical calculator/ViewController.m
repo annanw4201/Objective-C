@@ -80,7 +80,7 @@
 }
 
 - (IBAction)operationPressed:(UIButton *)sender {
-    if (self.enteringNumber) {
+    if (self.enteringNumber || self.enteringVariable || self.enteringFloatingNumber) {
         [self enterPressed];
     }
     NSString *operation = [sender currentTitle];
@@ -94,6 +94,7 @@
         [self.brain pushOperand:[self.resultDisplay.text doubleValue]];
     }
     [self.expressionDisplay setText: [calculatorBrain descriptionOfProgram:self.brain.program]];
+    self.enteringVariable = NO;
     self.enteringNumber = NO;
     self.enteringFloatingNumber = NO;
     self.leadingZero = NO;
@@ -162,9 +163,25 @@
 }
 
 - (IBAction)graphPressed:(UIButton *)sender {
-    
+    id theDetailView = [self detailView];
+    if (self.enteringNumber || self.enteringVariable || self.enteringFloatingNumber) {
+        [self enterPressed];
+    }
+    if (theDetailView) {
+        NSLog(@"show detail");
+        [theDetailView setProgram:self.brain.program];
+    }
+    else {
+        NSLog(@"iphone");
+        [self performSegueWithIdentifier:@"showGraph" sender:self];
+    }
 }
 
+- (GraphViewController *)detailView {
+    id dvc = [self.splitViewController.viewControllers lastObject];
+    if (![dvc isKindOfClass:[GraphViewController class]]) dvc = nil;
+    return dvc;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

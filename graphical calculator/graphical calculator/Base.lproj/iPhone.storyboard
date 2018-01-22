@@ -229,7 +229,6 @@
                                 <state key="normal" title="Graph"/>
                                 <connections>
                                     <action selector="graphPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tMv-B3-DcY"/>
-                                    <segue destination="Z6S-Tb-NcQ" kind="show" identifier="showGraph" id="58u-JV-eUG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -241,6 +240,7 @@
                         <outlet property="expressionDisplay" destination="6y9-46-UQZ" id="FJd-aC-Dcg"/>
                         <outlet property="resultDisplay" destination="EAw-3y-uYz" id="GQU-2m-ljD"/>
                         <outlet property="variableDisplay" destination="avr-7E-uWi" id="ZaJ-Cg-PKF"/>
+                        <segue destination="Z6S-Tb-NcQ" kind="show" identifier="showGraph" id="G9y-hK-y3R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
