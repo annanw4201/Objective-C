@@ -12,15 +12,22 @@
 
 @interface GraphViewController () <graphViewData>
 @property (weak, nonatomic) IBOutlet GraphView *graphView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+@property (weak, nonatomic) IBOutlet UILabel *formulaLabel;
 @end
 
 @implementation GraphViewController
 @synthesize scale = _scale;
 @synthesize origin = _origin;
 @synthesize graphView = _graphView;
+@synthesize barButtonItem = _barButtonItem;
+@synthesize formulaLabel = _formulaLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setBarButtonItem:self.splitViewController.displayModeButtonItem];
+    [self.formulaLabel setText:[NSString stringWithFormat:@"y = 0"]];
+    self.splitViewController.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -41,6 +48,7 @@
 
 - (void)setProgram:(id)program {
     _program = program;
+    [self.formulaLabel setText:[NSString stringWithFormat:@"y = %@", [calculatorBrain descriptionOfProgram:program]]];
     [self.graphView setNeedsDisplay];
 }
 
@@ -65,6 +73,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setBarButtonItem:(UIBarButtonItem *)barButtonItem {
+    if (_barButtonItem != barButtonItem) {
+        NSLog(@"set bar button item now");
+        NSMutableArray *items = [self.toolBar.items mutableCopy];
+        // remove the item in toolbar if it has one presented
+        if (_barButtonItem) [items removeObject:_barButtonItem];
+        // insert the new item in toolbar
+        if (barButtonItem) [items addObject:barButtonItem];
+        self.toolBar.items = items;
+        _barButtonItem = barButtonItem;
+    }
+}
+
+- (void)splitViewController:(UISplitViewController *)svc willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode {
+    if (displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
+        NSLog(@"hidden");
+    }
+    if (displayMode == UISplitViewControllerDisplayModeAllVisible) {
+        NSLog(@"all visible");
+    }
+    if (displayMode == UISplitViewControllerDisplayModePrimaryOverlay) {
+        NSLog(@"overlay");
+        svc.displayModeButtonItem.title = @"Calculator";
+        [self setBarButtonItem:svc.displayModeButtonItem];
+    }
+}
 /*
 #pragma mark - Navigation
 

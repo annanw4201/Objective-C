@@ -169,6 +169,7 @@
     }
     if (theDetailView) {
         NSLog(@"show detail");
+        [theDetailView setBarButtonItem:self.splitViewController.displayModeButtonItem];
         [theDetailView setProgram:self.brain.program];
     }
     else {

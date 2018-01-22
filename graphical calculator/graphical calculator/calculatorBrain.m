@@ -113,6 +113,7 @@
 + (NSString *)descriptionOfProgram:(id)program {
     NSString *description = @"";
     NSMutableArray *stack = [program mutableCopy];
+    if ([stack count] == 0) return @"0";
     while ([stack count]) {
         description = [description stringByAppendingString:[self getDescription:stack]];
         if ([stack count] > 0) {

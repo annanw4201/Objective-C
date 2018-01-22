@@ -284,17 +284,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zU6-GW-IiU" customClass="GraphView">
-                                <rect key="frame" x="16" y="20" width="732" height="984"/>
+                                <rect key="frame" x="20" y="64" width="728" height="940"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w39-6M-FAX">
+                                        <rect key="frame" x="564" y="8" width="156" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBw-99-ufd">
+                                <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Mbc-s3-jmN"/>
                     </view>
                     <navigationItem key="navigationItem" title="Graph" id="PT9-gj-He8"/>
                     <connections>
+                        <outlet property="formulaLabel" destination="w39-6M-FAX" id="UFr-fC-eK0"/>
                         <outlet property="graphView" destination="zU6-GW-IiU" id="Kj6-J2-ToW"/>
+                        <outlet property="toolBar" destination="OBw-99-ufd" id="Z3C-ga-xYL"/>
                         <outlet property="view" destination="zU6-GW-IiU" id="uus-8E-bI9"/>
                     </connections>
                 </viewController>

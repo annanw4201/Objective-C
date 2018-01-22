@@ -65,6 +65,7 @@
 		0F05E9192004335700D3DB90 /* GraphViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		0F05E91B2004338000D3DB90 /* GraphView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
 		0F05E91C2004338000D3DB90 /* GraphView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		0F4D35372015AFA200507523 /* splitViewBarButtonItemPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = splitViewBarButtonItemPresenter.h; sourceTree = "<group>"; };
 		0F83C6EB2005CD7B00E6EB56 /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxesDrawer.h; sourceTree = "<group>"; };
 		0F83C6EC2005CD7B00E6EB56 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +129,7 @@
 				0F05E9192004335700D3DB90 /* GraphViewController.m */,
 				0F05E91B2004338000D3DB90 /* GraphView.h */,
 				0F05E91C2004338000D3DB90 /* GraphView.m */,
+				0F4D35372015AFA200507523 /* splitViewBarButtonItemPresenter.h */,
 				0F05E91320042EEA00D3DB90 /* iPad.storyboard */,
 				0F05E8E1200421E600D3DB90 /* iPhone.storyboard */,
 				0F05E8E9200421E600D3DB90 /* LaunchScreen.storyboard */,
