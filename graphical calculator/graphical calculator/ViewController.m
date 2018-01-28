@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self setTitle:@"Calculator"];
 }
 
 - (calculatorBrain *)brain {
@@ -169,7 +170,6 @@
     }
     if (theDetailView) {
         NSLog(@"show detail");
-        [theDetailView setBarButtonItem:self.splitViewController.displayModeButtonItem];
         [theDetailView setProgram:self.brain.program];
     }
     else {

@@ -21,6 +21,7 @@
 		0F05E91A2004335700D3DB90 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E9192004335700D3DB90 /* GraphViewController.m */; };
 		0F05E91D2004338000D3DB90 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F05E91C2004338000D3DB90 /* GraphView.m */; };
 		0F83C6ED2005CD7B00E6EB56 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F83C6EC2005CD7B00E6EB56 /* AxesDrawer.m */; };
+		0FA03EC9201D74CF009660FB /* favoriteGraphTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA03EC8201D74CF009660FB /* favoriteGraphTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		0F4D35372015AFA200507523 /* splitViewBarButtonItemPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = splitViewBarButtonItemPresenter.h; sourceTree = "<group>"; };
 		0F83C6EB2005CD7B00E6EB56 /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxesDrawer.h; sourceTree = "<group>"; };
 		0F83C6EC2005CD7B00E6EB56 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
+		0FA03EC7201D74CF009660FB /* favoriteGraphTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = favoriteGraphTableViewController.h; sourceTree = "<group>"; };
+		0FA03EC8201D74CF009660FB /* favoriteGraphTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = favoriteGraphTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,8 @@
 				0F05E91B2004338000D3DB90 /* GraphView.h */,
 				0F05E91C2004338000D3DB90 /* GraphView.m */,
 				0F4D35372015AFA200507523 /* splitViewBarButtonItemPresenter.h */,
+				0FA03EC7201D74CF009660FB /* favoriteGraphTableViewController.h */,
+				0FA03EC8201D74CF009660FB /* favoriteGraphTableViewController.m */,
 				0F05E91320042EEA00D3DB90 /* iPad.storyboard */,
 				0F05E8E1200421E600D3DB90 /* iPhone.storyboard */,
 				0F05E8E9200421E600D3DB90 /* LaunchScreen.storyboard */,
@@ -302,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FA03EC9201D74CF009660FB /* favoriteGraphTableViewController.m in Sources */,
 				0F83C6ED2005CD7B00E6EB56 /* AxesDrawer.m in Sources */,
 				0F05E8E6200421E600D3DB90 /* graphical_calculator.xcdatamodeld in Sources */,
 				0F05E8E0200421E600D3DB90 /* ViewController.m in Sources */,
