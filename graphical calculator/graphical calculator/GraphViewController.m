@@ -9,8 +9,9 @@
 #import "GraphViewController.h"
 #import "GraphView.h"
 #import "calculatorBrain.h"
+#import "favoriteGraphTableViewController.h"
 
-@interface GraphViewController () <graphViewData>
+@interface GraphViewController () <graphViewData, favoriteGraphTableViewDelegate>
 @property (weak, nonatomic) IBOutlet GraphView *graphView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 @end
@@ -72,7 +73,7 @@
 
 - (void)setProgram:(id)program {
     _program = program;
-    NSString *formulaStr = [NSString stringWithFormat:@"y = %@", [calculatorBrain descriptionOfProgram:program]];
+    NSString *formulaStr = [NSString stringWithFormat:@"y = %@", [calculatorBrain topOfDescriptionOfProgram:program]];
     if (![formulaStr isEqualToString:@""]) {
         UIBarButtonItem *formulaButton = [[UIBarButtonItem alloc] init];
         [formulaButton setTitle:formulaStr];
@@ -126,13 +127,10 @@
 
 - (void)setFormulaBarButtonItem:(UIBarButtonItem *)formulaBarButtonItem {
     if (_formulaBarButtonItem != formulaBarButtonItem) {
-        NSLog(@"set formula");
+        //NSLog(@"set formula");
         NSMutableArray *items = [self.toolBar.items mutableCopy];
         NSUInteger index = [items indexOfObject:_formulaBarButtonItem];
-        if (index == NSNotFound) NSLog(@"fefe");
-        NSLog(@"%lu", (unsigned long)index);
-        //if (_formulaBarButtonItem) [items removeObject:_formulaBarButtonItem];
-        
+        // replace the new formula bar button item in toolbar
         if (formulaBarButtonItem && index != NSNotFound) {
             [items replaceObjectAtIndex:index withObject:formulaBarButtonItem];
         }
@@ -143,11 +141,10 @@
 
 - (void)setNavigationItem:(UIBarButtonItem *)navigationItem {
     if (_navigationItem != navigationItem) {
-        NSLog(@"set bar button item now");
+        //NSLog(@"set bar button item now");
         NSMutableArray *items = [self.toolBar.items mutableCopy];
         NSUInteger index = [items indexOfObject:_navigationItem];
-        // remove the item in toolbar if it has one presented
-        // insert the new item in toolbar
+        // replace the new nav bar button item in toolbar
         if (navigationItem && index != NSNotFound) {
             [items replaceObjectAtIndex:index withObject:navigationItem];
         }
@@ -158,42 +155,75 @@
 
 - (void)splitViewController:(UISplitViewController *)svc willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode {
     if (displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
-        NSLog(@"hidden");
+        //NSLog(@"hidden");
     }
     if (displayMode == UISplitViewControllerDisplayModeAllVisible) {
-        NSLog(@"all visible");
+        //NSLog(@"all visible");
     }
     if (displayMode == UISplitViewControllerDisplayModePrimaryOverlay) {
-        NSLog(@"overlay");
+        //NSLog(@"overlay");
         [self setNavigationItem:svc.displayModeButtonItem];
     }
 }
 
 - (void)favoritePressed:(UIBarButtonItem *)sender {
-    NSLog(@"fav pressed");
+    //NSLog(@"fav pressed");
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
     UIViewController *favoriteGraphTableVC = [storyBoard instantiateViewControllerWithIdentifier:@"favoriteGraphTableVC"];
     [favoriteGraphTableVC setPreferredContentSize:CGSizeMake(300, 400)];
     favoriteGraphTableVC.modalPresentationStyle = UIModalPresentationPopover;
+    
+    // set up popover for favorite graph view controller
     UIPopoverPresentationController *popoverVC = favoriteGraphTableVC.popoverPresentationController;
     popoverVC.barButtonItem = sender;
     popoverVC.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    
+    NSArray *programArray = [[NSUserDefaults standardUserDefaults] valueForKey:@"programArray"];
+    for (id program in programArray) {
+        NSLog(@"++%@", program);
+    }
+    if ([favoriteGraphTableVC isKindOfClass:[favoriteGraphTableViewController class]]) {
+        //NSLog(@"set table");
+        [(favoriteGraphTableViewController *)favoriteGraphTableVC setProgramArray:programArray];
+        [(favoriteGraphTableViewController *)favoriteGraphTableVC setDelegate:self];
+    }
     [self presentViewController:favoriteGraphTableVC animated:NO completion:nil];
 }
 
+- (IBAction)addToFavoritePressed:(UIButton *)sender {
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *programArray = [[standardUserDefaults valueForKey:@"programArray"] mutableCopy];
+    if (!programArray) {
+        programArray = [[NSMutableArray alloc] init];
+    }
+    if (self.program) [programArray addObject:self.program];
+    //NSLog(@"top is %@", [calculatorBrain topOfDescriptionOfProgram:self.program]);
+    [standardUserDefaults setObject:programArray forKey:@"programArray"];
+    [standardUserDefaults synchronize];
+}
 
-#pragma mark - Navigation
+- (void)favoriteGraphTableViewController:(id)sender chosenProgram:(id)program {
+    self.program = program;
+}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"showFavorite"]) {
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
-        UIViewController *favoriteGraphTableVC = [storyBoard instantiateViewControllerWithIdentifier:@"favoriteGraphTableVC"];
-        [self presentViewController:favoriteGraphTableVC animated:NO completion:nil];
+- (void)favoriteGraphTableViewController:(id)sender deleteProgram:(NSInteger)toBeRemovedIndex {
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *programArray = [[standardUserDefaults valueForKey:@"programArray"] mutableCopy];
+    [programArray removeObjectAtIndex:toBeRemovedIndex];
+    [standardUserDefaults setObject:programArray forKey:@"programArray"];
+    [standardUserDefaults synchronize];
+    if ([sender isKindOfClass:[favoriteGraphTableViewController class]]) {
+        [(favoriteGraphTableViewController *)sender setProgramArray:programArray];
     }
 }
 
+#pragma mark - Navigation
+/*
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

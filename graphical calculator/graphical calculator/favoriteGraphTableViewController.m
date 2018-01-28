@@ -7,12 +7,19 @@
 //
 
 #import "favoriteGraphTableViewController.h"
+#import "calculatorBrain.h"
 
 @interface favoriteGraphTableViewController ()
 
 @end
 
 @implementation favoriteGraphTableViewController
+@synthesize programArray = _programArray;
+
+- (void)setProgramArray:(NSArray *)programArray {
+    _programArray = programArray;
+    [[self tableView] reloadData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,44 +39,45 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return [self.programArray count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"programCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    
+    id program = [self.programArray objectAtIndex:[indexPath row]];
+    NSString *programStr = [NSString stringWithFormat:@"y = %@", [calculatorBrain topOfDescriptionOfProgram:program]];
+    [cell.textLabel setText:programStr];
     return cell;
 }
-*/
 
-/*
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.delegate favoriteGraphTableViewController:self chosenProgram:[self.programArray objectAtIndex:[indexPath row]]];
+}
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        NSInteger toBeRemovedIndex = [indexPath row];
+        [self.delegate favoriteGraphTableViewController:self deleteProgram:toBeRemovedIndex];
+        
+        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
 /*
 // Override to support rearranging the table view.

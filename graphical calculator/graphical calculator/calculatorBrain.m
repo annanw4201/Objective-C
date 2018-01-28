@@ -224,4 +224,12 @@
     return [calculatorBrain runProgram:self.program usingVariableValues:self.variableDict];
 }
 
++ (NSString *)topOfDescriptionOfProgram:(id)program {
+    NSString *description = @"";
+    NSMutableArray *stack = [program mutableCopy];
+    if ([stack count] == 0) return @"0";
+    description = [self getDescription:stack];
+    return description;
+}
+
 @end
