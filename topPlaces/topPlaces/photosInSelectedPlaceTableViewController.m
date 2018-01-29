@@ -1,33 +1,35 @@
 //
-//  topPlacesTableViewController.m
+//  photosInSelectedPlaceTableViewController.m
 //  topPlaces
 //
-//  Created by Wang Tom on 2018-01-28.
+//  Created by Wang Tom on 2018-01-29.
 //  Copyright © 2018 Wang Tom. All rights reserved.
 //
 
-#import "topPlacesTableViewController.h"
-#import "FlickrFetcher.h"
 #import "photosInSelectedPlaceTableViewController.h"
+#import "FlickrFetcher.h"
 
-@interface topPlacesTableViewController ()
-@property (nonatomic, strong)NSArray *topPlaces;
+#define maxPhotos 20
+
+@interface photosInSelectedPlaceTableViewController ()
+@property (nonatomic, strong)NSArray *photos;
 @end
 
-@implementation topPlacesTableViewController
-@synthesize topPlaces = _topPlaces;
+@implementation photosInSelectedPlaceTableViewController
+@synthesize place = _place;
+@synthesize photos = _photos;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"topplaces view did load");
-    NSArray *topPlacesArray = [FlickrFetcher topPlaces];
-    _topPlaces = topPlacesArray;
-    //NSLog(@"topPlaces: %@", topPlacesArray);
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (_place) {
+        self.photos = [FlickrFetcher photosInPlace:self.place maxResults:maxPhotos];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,16 +37,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setTopPlaces:(NSArray *)topPlaces {
-    _topPlaces = topPlaces;
+- (void)setPhotos:(NSArray *)photos {
+    //NSLog(@"setPhotos %@", photos);
+    _photos = photos;
     [self.tableView reloadData];
 }
 
-- (NSArray *)topPlaces {
-    if (!_topPlaces) {
-        _topPlaces = [NSArray array];
-    }
-    return _topPlaces;
+- (void)setPlace:(NSDictionary *)place {
+    //NSLog(@"setPlace %@", place);
+    _place = place;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -54,27 +56,31 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.topPlaces count];
+    return [self.photos count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"topPlacesCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photosInSelectedPlaceCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    NSDictionary *place = [self.topPlaces objectAtIndex:[indexPath row]];
-    [cell.textLabel setText:[place objectForKey:FLICKR_CITYNAME]];
-    [cell.detailTextLabel setText:[place objectForKey:FLICKR_PLACE_NAME]];
+    NSDictionary *photo = [self.photos objectAtIndex:[indexPath row]];
+    NSString *title = [photo objectForKey:FLICKR_PHOTO_TITLE];
+    NSString *detailText =[photo objectForKey:FLICKR_PHOTO_DESCRIPTION];
+    if (title == nil && detailText != nil) {
+        [cell.textLabel setText:detailText];
+    }
+    else if (title == nil && detailText == nil) {
+        [cell.textLabel setText:@"Unknown"];
+    }
+    else {
+        [cell.textLabel setText:title];
+        [cell.detailTextLabel setText:detailText];
+    }
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger selectedRow = [indexPath row];
-    NSDictionary *place = [self.topPlaces objectAtIndex:selectedRow];
-    NSLog(@"%@, ", [place objectForKey:FLICKR_PLACEURL]);
-    [self performSegueWithIdentifier:@"showPhotosInSelectedPlace" sender:place];
-}
 
 /*
 // Override to support conditional editing of the table view.
@@ -110,20 +116,14 @@
 }
 */
 
-
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"showPhotosInSelectedPlace"]) {
-        NSLog(@"showInSelected prepare");
-        if ([sender isKindOfClass:[NSDictionary class]]) {
-            [segue.destinationViewController setPlace:sender];
-        }
-    }
 }
-
+*/
 
 @end
