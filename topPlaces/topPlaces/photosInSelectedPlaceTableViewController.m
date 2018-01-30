@@ -8,6 +8,7 @@
 
 #import "photosInSelectedPlaceTableViewController.h"
 #import "FlickrFetcher.h"
+#import "photoImageViewController.h"
 
 #define maxPhotos 20
 
@@ -81,6 +82,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self performSegueWithIdentifier:@"showPhotoImage" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -116,14 +121,22 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showPhotoImage"]) {
+        if ([sender isKindOfClass:[UITableViewCell class]]) {
+            UITableViewCell *cell = sender;
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+            NSDictionary *photo = [self.photos objectAtIndex:[indexPath row]];
+            [segue.destinationViewController setPhoto:photo];
+            [segue.destinationViewController setTitle:[cell.textLabel text]];
+        }
+    }
 }
-*/
+
 
 @end

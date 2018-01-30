@@ -19,7 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"topplaces view did load");
     NSArray *topPlacesArray = [FlickrFetcher topPlaces];
     _topPlaces = topPlacesArray;
     //NSLog(@"topPlaces: %@", topPlacesArray);
@@ -72,7 +71,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger selectedRow = [indexPath row];
     NSDictionary *place = [self.topPlaces objectAtIndex:selectedRow];
-    NSLog(@"%@, ", [place objectForKey:FLICKR_PLACEURL]);
     [self performSegueWithIdentifier:@"showPhotosInSelectedPlace" sender:place];
 }
 
@@ -110,7 +108,6 @@
 }
 */
 
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -118,9 +115,10 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"showPhotosInSelectedPlace"]) {
-        NSLog(@"showInSelected prepare");
         if ([sender isKindOfClass:[NSDictionary class]]) {
-            [segue.destinationViewController setPlace:sender];
+            NSDictionary *place = sender;
+            [segue.destinationViewController setPlace:place];
+            [segue.destinationViewController setTitle:[place objectForKey:FLICKR_CITYNAME]];
         }
     }
 }
