@@ -9,6 +9,7 @@
 #import "photosInSelectedPlaceTableViewController.h"
 #import "FlickrFetcher.h"
 #import "photoImageViewController.h"
+#import "cachePhoto.h"
 
 #define maxPhotos 20
 
@@ -83,7 +84,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [cachePhoto savePhoto:[self.photos objectAtIndex:[indexPath row]]];
     [self performSegueWithIdentifier:@"showPhotoImage" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
 }
 

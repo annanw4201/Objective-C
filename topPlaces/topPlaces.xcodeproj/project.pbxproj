@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F66404D2027FE86000818B8 /* cachePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F66404C2027FE86000818B8 /* cachePhoto.m */; };
 		0FD8422D201FED8900A32231 /* photoImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8422C201FED8900A32231 /* photoImageViewController.m */; };
 		0FECE3A9201E6D7200E668BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FECE3A8201E6D7200E668BA /* AppDelegate.m */; };
 		0FECE3AF201E6D7200E668BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FECE3AD201E6D7200E668BA /* Main.storyboard */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F66404B2027FE86000818B8 /* cachePhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cachePhoto.h; sourceTree = "<group>"; };
+		0F66404C2027FE86000818B8 /* cachePhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cachePhoto.m; sourceTree = "<group>"; };
 		0FD8422B201FED8900A32231 /* photoImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = photoImageViewController.h; sourceTree = "<group>"; };
 		0FD8422C201FED8900A32231 /* photoImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = photoImageViewController.m; sourceTree = "<group>"; };
 		0FECE3A4201E6D7200E668BA /* topPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = topPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +138,8 @@
 				0FD8422C201FED8900A32231 /* photoImageViewController.m */,
 				0FECE3E3201E776B00E668BA /* recentViewedTableViewController.h */,
 				0FECE3E4201E776B00E668BA /* recentViewedTableViewController.m */,
+				0F66404B2027FE86000818B8 /* cachePhoto.h */,
+				0F66404C2027FE86000818B8 /* cachePhoto.m */,
 			);
 			path = topPlaces;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				0FECE3BA201E6D7200E668BA /* main.m in Sources */,
 				0FECE3E5201E776B00E668BA /* recentViewedTableViewController.m in Sources */,
 				0FECE3E8201E77A000E668BA /* topPlacesTableViewController.m in Sources */,
+				0F66404D2027FE86000818B8 /* cachePhoto.m in Sources */,
 				0FECE3DF201E6D9C00E668BA /* FlickrFetcher.m in Sources */,
 				0FECE3A9201E6D7200E668BA /* AppDelegate.m in Sources */,
 				0FECE3EB201EFD8700E668BA /* photosInSelectedPlaceTableViewController.m in Sources */,
