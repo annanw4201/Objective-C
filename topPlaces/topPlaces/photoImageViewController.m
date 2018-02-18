@@ -23,17 +23,13 @@
     NSLog(@"view did load");
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    if (self.imageView.image) {
-        self.imageScrollView.contentSize = self.imageView.image.size;
-    }
-    [self zoomWholePhoto];
+    [self updateImage];
     self.imageScrollView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [self zoomWholePhoto];
+    [self updateImage];
 }
 
 - (void)setPhoto:(NSDictionary *)photo {
@@ -52,14 +48,7 @@
 - (void)setImageView:(UIImageView *)imageView {
     NSLog(@"set imgView");
     _imageView = imageView;
-    
-    if (self.photo) {
-        NSURL *imageURL = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.imageView.image = [[UIImage alloc] initWithData:imageData];
-        self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
-    }
+    [self updateImage];
 }
 
 - (void)zoomWholePhoto {
@@ -67,7 +56,7 @@
     CGFloat imageViewHeight = self.imageScrollView.bounds.size.height;
     CGFloat wholePhotoWidthScale = imageViewWidth / self.imageView.image.size.width;
     CGFloat wholePhotoHeightScale = imageViewHeight / self.imageView.image.size.height;
-    //NSLog(@"width and height %f, %f", wholePhotoWidthScale, wholePhotoHeightScale);
+    //NSLog(@"width and height %f, %f", imageViewWidth, imageViewHeight);
     CGFloat minScale = wholePhotoWidthScale > wholePhotoHeightScale ? wholePhotoHeightScale : wholePhotoWidthScale;
     //NSLog(@"min %f", minScale);
     [self.imageScrollView setZoomScale:minScale];
@@ -81,6 +70,31 @@
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.imageView;
+}
+
+- (void) updateImage {
+    if (self.imageView.image) {
+        self.imageScrollView.zoomScale = 1.0;
+        self.imageScrollView.contentSize = self.imageView.image.size;
+    }
+    if (self.photo) {
+        NSURL *imageURL = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageView.image = [[UIImage alloc] initWithData:imageData];
+        self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
+    }
+    [self zoomWholePhoto];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    NSLog(@"will layout subview");
+    [self updateImage];
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
 }
 
 /*
