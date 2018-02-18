@@ -15,3 +15,5 @@
 - use NSUserDefaults to save data, need to mutuble copy the data, and then manipulate that data, and finally set the new data at a predetermined path.
 - To synchronize NSUserDefaults is not cheap, the system will calls for you, it's useful when we suddenly terminate the app from XCode. We will synchronize since our app will not use that many data.
 - scrollView, should update the image frame and any ohter settings when rotate
+- Ask someone about Autolayouts 
+- need to set zoomScale of scrollView before set the content size since zoom scale will affect content size
