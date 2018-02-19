@@ -31,7 +31,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    self.photos = [cachePhoto retrieveAllPhotos];
+    dispatch_queue_t downloadQueue = dispatch_queue_create("retrieve recent viewed photos", NULL);
+    dispatch_async(downloadQueue, ^{
+        self.photos = [cachePhoto retrieveAllPhotos];
+    });
     [self.tableView reloadData];
 }
 

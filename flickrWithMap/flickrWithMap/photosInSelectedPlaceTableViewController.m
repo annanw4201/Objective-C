@@ -30,7 +30,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     if (_place) {
-        self.photos = [FlickrFetcher photosInPlace:self.place maxResults:maxPhotos];
+        dispatch_queue_t downloadQueue = dispatch_queue_create("download photos in a place", NULL);
+        dispatch_async(downloadQueue, ^{
+            self.photos = [FlickrFetcher photosInPlace:self.place maxResults:maxPhotos];
+        });
     }
 }
 

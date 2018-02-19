@@ -19,15 +19,34 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSArray *topPlacesArray = [FlickrFetcher topPlaces];
-    _topPlaces = topPlacesArray;
-    //NSLog(@"topPlaces: %@", topPlacesArray);
+    NSLog(@"view did load");
+    [self refresh:self.navigationItem.leftBarButtonItem];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+- (IBAction)refresh:(UIBarButtonItem *)sender {
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("download places data", NULL);
+    dispatch_async(downloadQueue, ^{
+        NSArray *topPlacesArray = [NSArray array];
+        topPlacesArray = [FlickrFetcher topPlaces];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [sender setEnabled:TRUE];
+            
+            self.navigationItem.leftBarButtonItem = sender;
+            self.topPlaces = topPlacesArray;
+        });
+    });
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

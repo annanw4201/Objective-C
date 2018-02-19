@@ -78,11 +78,16 @@
         self.imageScrollView.contentSize = self.imageView.image.size;
     }
     if (self.photo) {
-        NSURL *imageURL = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.imageView.image = [[UIImage alloc] initWithData:imageData];
-        self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
+        dispatch_queue_t downloadQueue = dispatch_queue_create("image downlaod", NULL);
+        dispatch_async(downloadQueue, ^{
+            NSURL *imageURL = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge];
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+                self.imageView.image = [[UIImage alloc] initWithData:imageData];
+                self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
+            });
+        });
     }
     [self zoomWholePhoto];
 }

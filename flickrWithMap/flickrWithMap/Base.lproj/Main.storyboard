@@ -117,7 +117,13 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" systemItem="topRated" id="5bE-de-9hQ"/>
-                    <navigationItem key="navigationItem" id="QBP-kU-VkU"/>
+                    <navigationItem key="navigationItem" id="QBP-kU-VkU">
+                        <barButtonItem key="leftBarButtonItem" title="Refresh" id="7wV-lQ-Ufp" userLabel="Refresh">
+                            <connections>
+                                <action selector="refresh:" destination="YhJ-Qu-iiF" id="xVy-Xe-njU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="s2B-9z-3V5" kind="show" identifier="showPhotosInSelectedPlace" id="y1y-3d-edw"/>
                     </connections>
