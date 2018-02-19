@@ -17,3 +17,4 @@
 - scrollView, should update the image frame and any ohter settings when rotate
 - Ask someone about Autolayouts 
 - need to set zoomScale of scrollView before set the content size since zoom scale will affect content size
+- read and write to local variable in code block need to use __block prefix
