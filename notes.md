@@ -24,3 +24,4 @@
 - inside the code block, when setting properties, remember to use self.property, otherwise may not set
 - when setting the properties, check if that property triggers the UI method, if it does, put it inside main thread
 - since ios 11.2, there is a bug, the barBUttonItem will not change back to normal state unless set it unable then enable again
+- remember to set the delegate first, then do some changes with the delegate
