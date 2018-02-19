@@ -23,3 +23,4 @@
 - don't call UI methods outside of main queue, when do something related to UI inside a code block, just put those UI methods into main queue block
 - inside the code block, when setting properties, remember to use self.property, otherwise may not set
 - when setting the properties, check if that property triggers the UI method, if it does, put it inside main thread
+- since ios 11.2, there is a bug, the barBUttonItem will not change back to normal state unless set it unable then enable again
