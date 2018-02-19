@@ -58,7 +58,7 @@
 - (void)setPlace:(NSDictionary *)place {
     //NSLog(@"setPlace %@", place);
     _place = place;
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 }
 
 #pragma mark - Table view data source

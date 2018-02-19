@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"view did load");
+    //NSLog(@"view did load");
     [self refresh:self.navigationItem.leftBarButtonItem];
     
     // Uncomment the following line to preserve selection between presentations.
