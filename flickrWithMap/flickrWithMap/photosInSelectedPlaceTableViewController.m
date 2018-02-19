@@ -29,10 +29,17 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    if (_place) {
+    if (self.place) {
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [spinner startAnimating];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+        
         dispatch_queue_t downloadQueue = dispatch_queue_create("download photos in a place", NULL);
         dispatch_async(downloadQueue, ^{
-            self.photos = [FlickrFetcher photosInPlace:self.place maxResults:maxPhotos];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.photos = [FlickrFetcher photosInPlace:self.place maxResults:maxPhotos];
+                self.navigationItem.rightBarButtonItem = NULL;
+            });
         });
     }
 }
@@ -63,7 +70,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.photos count];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photosInSelectedPlaceCell" forIndexPath:indexPath];
@@ -141,6 +147,5 @@
         }
     }
 }
-
 
 @end

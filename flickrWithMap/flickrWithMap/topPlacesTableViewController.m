@@ -39,14 +39,13 @@
         NSArray *topPlacesArray = [NSArray array];
         topPlacesArray = [FlickrFetcher topPlaces];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [sender setEnabled:TRUE];
-            
+            [sender setEnabled:false];
+            [sender setEnabled:true];
             self.navigationItem.leftBarButtonItem = sender;
             self.topPlaces = topPlacesArray;
         });
     });
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -74,7 +73,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.topPlaces count];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"topPlacesCell" forIndexPath:indexPath];
@@ -141,6 +139,5 @@
         }
     }
 }
-
 
 @end

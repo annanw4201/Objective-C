@@ -31,11 +31,18 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    
     dispatch_queue_t downloadQueue = dispatch_queue_create("retrieve recent viewed photos", NULL);
     dispatch_async(downloadQueue, ^{
         self.photos = [cachePhoto retrieveAllPhotos];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.navigationItem.rightBarButtonItem = NULL;
+            [self.tableView reloadData];
+        });
     });
-    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
