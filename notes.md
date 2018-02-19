@@ -17,4 +17,8 @@
 - scrollView, should update the image frame and any ohter settings when rotate
 - Ask someone about Autolayouts 
 - need to set zoomScale of scrollView before set the content size since zoom scale will affect content size
-- read and write to local variable in code block need to use __block prefix
+- read and write to local variable in code block need to use \_\_block prefix
+- local variable is strong by default, so when use blcok variable \_\_weak might help avoiding memory cycles which can cause memory leaks
+- When to use blocks: Enumeration, view animation, sorting(use code block as comarision method), notification, error handler, completion handler, Multi-threading is the essential reason we use block
+- don't call UI methods outside of main queue, when do something related to UI inside a code block, just put those UI methods into main queue block
+- 
