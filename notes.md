@@ -21,4 +21,5 @@
 - local variable is strong by default, so when use blcok variable \_\_weak might help avoiding memory cycles which can cause memory leaks
 - When to use blocks: Enumeration, view animation, sorting(use code block as comarision method), notification, error handler, completion handler, Multi-threading is the essential reason we use block
 - don't call UI methods outside of main queue, when do something related to UI inside a code block, just put those UI methods into main queue block
-- 
+- inside the code block, when setting properties, remember to use self.property, otherwise may not set
+- when setting the properties, check if that property triggers the UI method, if it does, put it inside main thread
