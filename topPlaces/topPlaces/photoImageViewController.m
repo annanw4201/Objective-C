@@ -20,25 +20,20 @@
 @synthesize photo = _photo;
 
 - (void)viewDidLoad {
-    NSLog(@"view did load");
+    //NSLog(@"view did load");
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self updateImage];
     self.imageScrollView.delegate = self;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
     [self updateImage];
 }
 
 - (void)setPhoto:(NSDictionary *)photo {
-    NSLog(@"set Photo");
+    //NSLog(@"set Photo");
     _photo = photo;
 }
 
 - (void)setImageScrollView:(UIScrollView *)imageScrollView {
-    NSLog(@"set ScrllView");
+    //NSLog(@"set ScrllView");
     _imageScrollView = imageScrollView;
     self.imageScrollView.minimumZoomScale = 0.2;
     self.imageScrollView.maximumZoomScale = 1.5;
@@ -46,9 +41,8 @@
 }
 
 - (void)setImageView:(UIImageView *)imageView {
-    NSLog(@"set imgView");
+    //NSLog(@"set imgView");
     _imageView = imageView;
-    [self updateImage];
 }
 
 - (void)zoomWholePhoto {
@@ -56,11 +50,13 @@
     CGFloat imageViewHeight = self.imageScrollView.bounds.size.height;
     CGFloat wholePhotoWidthScale = imageViewWidth / self.imageView.image.size.width;
     CGFloat wholePhotoHeightScale = imageViewHeight / self.imageView.image.size.height;
-    //NSLog(@"width and height %f, %f", imageViewWidth, imageViewHeight);
+    
+    NSLog(@"scrollView width and height %f, %f", imageViewWidth, imageViewHeight);
+    NSLog(@"imageView width and height %f, %f", self.imageView.image.size.width, self.imageView.image.size.height);
     CGFloat minScale = wholePhotoWidthScale > wholePhotoHeightScale ? wholePhotoHeightScale : wholePhotoWidthScale;
-    //NSLog(@"min %f", minScale);
+    NSLog(@"min %f", minScale);
     [self.imageScrollView setZoomScale:minScale];
-    self.imageScrollView.zoomScale = minScale;
+    NSLog(@"scrolView min %f", self.imageScrollView.zoomScale);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,14 +79,8 @@
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.imageView.image = [[UIImage alloc] initWithData:imageData];
         self.imageView.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
+        [self zoomWholePhoto];
     }
-    [self zoomWholePhoto];
-}
-
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    NSLog(@"will layout subview");
-    [self updateImage];
 }
 
 - (BOOL)shouldAutorotate {

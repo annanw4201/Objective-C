@@ -23,8 +23,8 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-    [self updateImage];
     self.imageScrollView.delegate = self;
+    [self updateImage];
 }
 
 - (void)setPhoto:(NSDictionary *)photo {
