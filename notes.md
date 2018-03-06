@@ -25,3 +25,8 @@
 - when setting the properties, check if that property triggers the UI method, if it does, put it inside main thread
 - since ios 11.2, there is a bug, the barBUttonItem will not change back to normal state unless set it unable then enable again
 - remember to set the delegate first, then do some changes with the delegate
+- core Location is an API for getting the device location, it has CLLocation object storing coordinates, altitude; and also CLLocationAccuracy, CLLocationSpeed, CLLocationDirection, timeStam, method of measure distance from another CLLocation.
+- use CLLocationManager to get CLLocation. But always fist check if the user allow the app to use location service or not
+- mapKit is a framework, it has MKMapView, MKAnnotationView which has title, subtitle, left and right accessory views(need to set canShowCallout to YES).
+- set region of MKMapView will zoom and scale to that region(MKCoordinateRegion)
+- MKMapPoint MKMapRect can be convert to/back from CGPoint, CGRect
