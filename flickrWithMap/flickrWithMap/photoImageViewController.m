@@ -24,11 +24,13 @@
     
     // Do any additional setup after loading the view.
     self.imageScrollView.delegate = self;
-    [self updateImage];
+    //[self updateImage];
 }
 
 - (void)setPhoto:(NSDictionary *)photo {
     _photo = photo;
+    [self.navigationItem setTitle:[self.photo objectForKey:FLICKR_PHOTO_TITLE]];
+    [self updateImage];
 }
 
 - (void)setImageScrollView:(UIScrollView *)imageScrollView {
@@ -64,10 +66,12 @@
 }
 
 - (void) updateImage {
+    /*
     if (self.imageView.image) {
         self.imageScrollView.zoomScale = 1.0;
         self.imageScrollView.contentSize = self.imageView.image.size;
     }
+     */
     if (self.photo) {
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [spinner startAnimating];

@@ -8,6 +8,7 @@
 
 #import "mapViewController.h"
 #import <MapKit/MapKit.h>
+#import "photoImageViewController.h"
 
 @interface mapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -26,14 +27,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showPhotoImage"]) {
+        if ([sender isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *photo = sender;
+            [segue.destinationViewController setPhoto:photo];
+        }
+    }
 }
-*/
+
 
 @end

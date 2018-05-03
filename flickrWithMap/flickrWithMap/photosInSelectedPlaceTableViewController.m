@@ -10,6 +10,7 @@
 #import "FlickrFetcher.h"
 #import "photoImageViewController.h"
 #import "cachePhoto.h"
+#import "mapViewController.h"
 
 #define maxPhotos 20
 
@@ -94,42 +95,56 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [cachePhoto savePhoto:[self.photos objectAtIndex:[indexPath row]]];
-    [self performSegueWithIdentifier:@"showPhotoImage" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        id navigationVC = [[self.splitViewController viewControllers] lastObject];
+        if ([navigationVC isKindOfClass:[UINavigationController class]]) {
+            id detailMapVC = [navigationVC topViewController];
+            if ([detailMapVC isKindOfClass:[mapViewController class]]) {
+                [detailMapVC performSegueWithIdentifier:@"showPhotoImage" sender:[self.photos objectAtIndex:[indexPath row]]];
+            }
+            else if ([detailMapVC isKindOfClass:[photoImageViewController class]]) {
+                [detailMapVC setPhoto:[self.photos objectAtIndex:[indexPath row]]];
+            }
+        }
+    }
+    else {
+        [self performSegueWithIdentifier:@"showPhotoImage" sender:[self.photos objectAtIndex:[indexPath row]]];
+    }
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 #pragma mark - Navigation
 
@@ -138,12 +153,10 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"showPhotoImage"]) {
-        if ([sender isKindOfClass:[UITableViewCell class]]) {
-            UITableViewCell *cell = sender;
-            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-            NSDictionary *photo = [self.photos objectAtIndex:[indexPath row]];
+        if ([sender isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *photo = sender;
             [segue.destinationViewController setPhoto:photo];
-            [segue.destinationViewController setTitle:[cell.textLabel text]];
+            //[segue.destinationViewController setTitle:[cell.textLabel text]];
         }
     }
 }

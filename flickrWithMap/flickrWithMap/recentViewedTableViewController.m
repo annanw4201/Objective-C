@@ -10,6 +10,7 @@
 #import "FlickrFetcher.h"
 #import "cachePhoto.h"
 #import "photoImageViewController.h"
+#import "mapViewController.h"
 
 @interface recentViewedTableViewController ()
 @property (nonatomic, weak) NSArray *photos;
@@ -82,42 +83,58 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"showPhotoImage" sender:[tableView cellForRowAtIndexPath:indexPath]];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        id navigationVC = [[self.splitViewController viewControllers] lastObject];
+        if ([navigationVC isKindOfClass:[UINavigationController class]]) {
+            id detialMapVC = [navigationVC topViewController];
+            if ([detialMapVC isKindOfClass:[mapViewController class]]) {
+                [detialMapVC performSegueWithIdentifier:@"showPhotoImage" sender:[self.photos objectAtIndex:[indexPath row]]];
+                NSLog(@"show image");
+            }
+            else if ([detialMapVC isKindOfClass:[photoImageViewController class]]) {
+                [detialMapVC setPhoto:[self.photos objectAtIndex:[indexPath row]]];
+                NSLog(@"detial view image");
+            }
+        }
+    }
+    else {
+        [self performSegueWithIdentifier:@"showPhotoImage" sender:[tableView cellForRowAtIndexPath:indexPath]];
+    }
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 
 #pragma mark - Navigation
@@ -132,7 +149,7 @@
             NSInteger row = [[self.tableView indexPathForCell:cell] row];
             NSDictionary *photo = [self.photos objectAtIndex:row];
             [segue.destinationViewController setPhoto:photo];
-            [segue.destinationViewController setTitle:[cell.textLabel text]];
+            //[segue.destinationViewController setTitle:[cell.textLabel text]];
         }
     }
 }
