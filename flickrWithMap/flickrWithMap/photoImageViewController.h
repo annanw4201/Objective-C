@@ -10,5 +10,5 @@
 
 @interface photoImageViewController : UIViewController
 @property(nonatomic, weak) NSDictionary *photo;
-@property (weak, nonatomic) NSData *photoData;
+//@property (weak, nonatomic) NSData *photoData;
 @end
