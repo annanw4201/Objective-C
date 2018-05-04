@@ -23,6 +23,8 @@
 		0F3FF473203A096900DF36E8 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F3FF471203A096900DF36E8 /* iPhone.storyboard */; };
 		0F4D5670204E2598006848A1 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F4D566E204E2598006848A1 /* iPad.storyboard */; };
 		0F4D5673204E2805006848A1 /* mapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D5672204E2805006848A1 /* mapViewController.m */; };
+		0FFE0E71209BBC520025AFEF /* mapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFE0E70209BBC520025AFEF /* mapAnnotation.m */; };
+		0FFE0E74209C25D30025AFEF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFE0E73209C25D30025AFEF /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,9 @@
 		0F4D566F204E2598006848A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/iPad.storyboard; sourceTree = "<group>"; };
 		0F4D5671204E2805006848A1 /* mapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mapViewController.h; sourceTree = "<group>"; };
 		0F4D5672204E2805006848A1 /* mapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mapViewController.m; sourceTree = "<group>"; };
+		0FFE0E6F209BBC520025AFEF /* mapAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mapAnnotation.h; sourceTree = "<group>"; };
+		0FFE0E70209BBC520025AFEF /* mapAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mapAnnotation.m; sourceTree = "<group>"; };
+		0FFE0E73209C25D30025AFEF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FFE0E74209C25D30025AFEF /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +114,7 @@
 				0F3FF42E203A085C00DF36E8 /* flickrWithMapTests */,
 				0F3FF439203A085C00DF36E8 /* flickrWithMapUITests */,
 				0F3FF411203A085B00DF36E8 /* Products */,
+				0FFE0E72209C25D30025AFEF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +155,8 @@
 				0F3FF46A203A094D00DF36E8 /* topPlacesTableViewController.m */,
 				0F4D5671204E2805006848A1 /* mapViewController.h */,
 				0F4D5672204E2805006848A1 /* mapViewController.m */,
+				0FFE0E6F209BBC520025AFEF /* mapAnnotation.h */,
+				0FFE0E70209BBC520025AFEF /* mapAnnotation.m */,
 			);
 			path = flickrWithMap;
 			sourceTree = "<group>";
@@ -168,6 +177,14 @@
 				0F3FF43C203A085C00DF36E8 /* Info.plist */,
 			);
 			path = flickrWithMapUITests;
+			sourceTree = "<group>";
+		};
+		0FFE0E72209C25D30025AFEF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0FFE0E73209C25D30025AFEF /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,6 +325,7 @@
 				0F3FF46C203A094D00DF36E8 /* cachePhoto.m in Sources */,
 				0F3FF415203A085C00DF36E8 /* AppDelegate.m in Sources */,
 				0F3FF46B203A094D00DF36E8 /* photoImageViewController.m in Sources */,
+				0FFE0E71209BBC520025AFEF /* mapAnnotation.m in Sources */,
 				0F3FF426203A085C00DF36E8 /* main.m in Sources */,
 				0F3FF41E203A085C00DF36E8 /* flickrWithMap.xcdatamodeld in Sources */,
 				0F3FF470203A094D00DF36E8 /* topPlacesTableViewController.m in Sources */,

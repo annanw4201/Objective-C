@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+
+@class mapViewController;
+
+@protocol mapViewControllerDelegate <NSObject>
+- (UIImage *)mapViewController: (mapViewController *)mapVC imageForAnnotation:(id <MKAnnotation>)annotation;
+@end
 
 @interface mapViewController : UIViewController
-
+@property (nonatomic, strong) NSArray *annotations;
+@property (nonatomic, weak) id<mapViewControllerDelegate> delegate;
 @end
+
+

@@ -10,15 +10,18 @@
 #import <MapKit/MapKit.h>
 #import "photoImageViewController.h"
 
-@interface mapViewController ()
+@interface mapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @end
 
 @implementation mapViewController
 @synthesize mapView = _mapView;
+@synthesize annotations = _annotations;
+@synthesize delegate = _delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.mapView.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -27,6 +30,37 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setMapView:(MKMapView *)mapView {
+    _mapView = mapView;
+    [self updateMapView];
+}
+
+- (void)setAnnotations:(NSArray *)annotations {
+    _annotations = annotations;
+    [self updateMapView];
+}
+
+- (void)updateMapView {
+    if (self.mapView.annotations) [self.mapView removeAnnotations:self.mapView.annotations];
+    if (self.annotations) [self.mapView addAnnotations:self.annotations];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"mapVC"];
+    if (!annotationView) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"mapVC"];
+        annotationView.canShowCallout = YES;
+        annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    }
+    annotationView.annotation = annotation;
+    return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    NSLog(@"select annotation");
+    UIImage *image = [self.delegate mapViewController:self imageForAnnotation:view.annotation];
+    [(UIImageView *)view.leftCalloutAccessoryView setImage:image];
+}
 
 #pragma mark - Navigation
 
