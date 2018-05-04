@@ -23,6 +23,7 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     // Do any additional setup after loading the view.
+    [self updateMapView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,15 +47,17 @@
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"mapVC"];
-    if (!annotationView) {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"mapVC"];
-        annotationView.canShowCallout = YES;
-        annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    MKAnnotationView *aview = [mapView dequeueReusableAnnotationViewWithIdentifier:@"mapVC"];
+    if (!aview) {
+        aview = [[MKMarkerAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"mapVC"];
+        aview.canShowCallout = YES;
+        aview.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        aview.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeInfoLight];
     }
-    annotationView.annotation = annotation;
-    return annotationView;
+    aview.annotation = annotation;
+    return aview;
 }
+
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     NSLog(@"select annotation");

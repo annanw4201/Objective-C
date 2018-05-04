@@ -20,7 +20,9 @@
 }
 
 - (NSString *)title {
-    return [self.photo objectForKey:FLICKR_PHOTO_TITLE];
+    NSString *title = [self.photo objectForKey:FLICKR_PHOTO_TITLE];
+    NSString *cityName = [self.photo objectForKey:FLICKR_CITYNAME];
+    return title ? title : cityName;
 }
 
 - (NSString *)subtitle {

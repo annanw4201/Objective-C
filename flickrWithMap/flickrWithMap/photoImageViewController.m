@@ -66,12 +66,10 @@
 }
 
 - (void) updateImage {
-    /*
     if (self.imageView.image) {
         self.imageScrollView.zoomScale = 1.0;
         self.imageScrollView.contentSize = self.imageView.image.size;
     }
-     */
     if (self.photo) {
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [spinner startAnimating];
@@ -90,10 +88,6 @@
             });
         });
     }
-}
-
-- (BOOL)shouldAutorotate {
-    return YES;
 }
 
 /*
