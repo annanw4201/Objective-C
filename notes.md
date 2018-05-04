@@ -30,3 +30,4 @@
 - mapKit is a framework, it has MKMapView, MKAnnotationView which has title, subtitle, left and right accessory views(need to set canShowCallout to YES).
 - set region of MKMapView will zoom and scale to that region(MKCoordinateRegion)
 - MKMapPoint MKMapRect can be convert to/back from CGPoint, CGRect
+- In IPad mode, we can get split view controllers, and then choose which view controller you want to operate on.
