@@ -9,6 +9,9 @@
 #import "mapViewController.h"
 #import <MapKit/MapKit.h>
 #import "photoImageViewController.h"
+#import "mapAnnotation.h"
+#import "photosInSelectedPlaceTableViewController.h"
+#import "topPlacesTableViewController.h"
 
 @interface mapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -44,6 +47,17 @@
 - (void)updateMapView {
     if (self.mapView.annotations) [self.mapView removeAnnotations:self.mapView.annotations];
     if (self.annotations) [self.mapView addAnnotations:self.annotations];
+    [self zoomMap];
+}
+
+- (void) zoomMap {
+    MKMapRect mapRect = MKMapRectNull;
+    for (id<MKAnnotation> annotation in self.annotations) {
+        MKMapPoint point = MKMapPointForCoordinate(annotation.coordinate);
+        MKMapRect mapRectForAnnotation = MKMapRectMake(point.x, point.y, 0.3, 0.3);
+        mapRect = MKMapRectUnion(mapRect, mapRectForAnnotation);
+    }
+    [self.mapView setVisibleMapRect:mapRect animated:YES];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -51,18 +65,47 @@
     if (!aview) {
         aview = [[MKMarkerAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"mapVC"];
         aview.canShowCallout = YES;
-        aview.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         aview.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeInfoLight];
     }
     aview.annotation = annotation;
     return aview;
 }
 
-
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     NSLog(@"select annotation");
-    UIImage *image = [self.delegate mapViewController:self imageForAnnotation:view.annotation];
-    [(UIImageView *)view.leftCalloutAccessoryView setImage:image];
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    view.leftCalloutAccessoryView = spinner;
+    
+    __block UIImage *image = nil;
+    dispatch_queue_t downloadQueue = dispatch_queue_create("download thumbnails", NULL);
+    dispatch_async(downloadQueue, ^{
+        image = [self.delegate mapViewController:self imageForAnnotation:view.annotation];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!image) view.leftCalloutAccessoryView = nil;
+            else {
+                view.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+                [(UIImageView *)view.leftCalloutAccessoryView setImage:image];
+            }
+        });
+    });
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    NSLog(@"callout tapped");
+    id tabVC = [[self.splitViewController viewControllers] firstObject];
+    if ([tabVC isKindOfClass:[UITabBarController class]]) {
+        id firstNavigationVC = [[(UITabBarController *)tabVC viewControllers] firstObject];
+        id topVC = [firstNavigationVC topViewController];
+        if ([topVC isKindOfClass:[topPlacesTableViewController class]]) {
+            mapAnnotation *anno = view.annotation;
+            [(topPlacesTableViewController *)topVC performSegueWithIdentifier:@"showPhotosInSelectedPlace" sender:anno.data];
+        }
+        else if ([topVC isKindOfClass:[photosInSelectedPlaceTableViewController class]]) {
+            mapAnnotation *anno = view.annotation;
+            [self performSegueWithIdentifier:@"showPhotoImage" sender:anno.data];
+        }
+    }
 }
 
 #pragma mark - Navigation
@@ -75,6 +118,14 @@
         if ([sender isKindOfClass:[NSDictionary class]]) {
             NSDictionary *photo = sender;
             [segue.destinationViewController setPhoto:photo];
+        }
+    }
+    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad &&
+             [segue.identifier isEqualToString:@"showPhotosInSelectedPlace"]) {
+        if ([sender isKindOfClass:[NSDictionary class]]) {
+            NSLog(@"show photos in that place");
+            NSDictionary *photoPlace = sender;
+            [segue.destinationViewController setPlace: photoPlace];
         }
     }
 }

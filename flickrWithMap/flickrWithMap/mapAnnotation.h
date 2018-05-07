@@ -10,6 +10,6 @@
 #import <MapKit/MapKit.h>
 
 @interface mapAnnotation : NSObject <MKAnnotation>
-+ (mapAnnotation *)annotationForPhoto:(NSDictionary *)photo;
-@property (nonatomic, strong) NSDictionary *photo;
++ (mapAnnotation *)annotationForPlaceAndPhoto:(NSDictionary *)data;
+@property (nonatomic, strong) NSDictionary *data;
 @end

@@ -11,10 +11,11 @@
 #import "photoImageViewController.h"
 #import "cachePhoto.h"
 #import "mapViewController.h"
+#import "mapAnnotation.h"
 
 #define maxPhotos 20
 
-@interface photosInSelectedPlaceTableViewController ()
+@interface photosInSelectedPlaceTableViewController () <mapViewControllerDelegate>
 @property (nonatomic, strong)NSArray *photos;
 @end
 
@@ -30,6 +31,14 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)updatePhotos {
     if (self.place) {
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [spinner startAnimating];
@@ -45,21 +54,46 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)updateDetailVC {
+    id navigationVC = [[self.splitViewController viewControllers] lastObject];
+    if ([navigationVC isKindOfClass:[UINavigationController class]]) {
+        id detailVC = [navigationVC topViewController];
+        if ([detailVC isKindOfClass:[mapViewController class]]) {
+            [(mapViewController *)detailVC setDelegate:self];
+            [(mapViewController *)detailVC setAnnotations:[self mapAnnotations]];
+        }
+    }
 }
 
 - (void)setPhotos:(NSArray *)photos {
     //NSLog(@"setPhotos %@", photos);
     _photos = photos;
     [self.tableView reloadData];
+    [self updateDetailVC];
 }
 
 - (void)setPlace:(NSDictionary *)place {
     //NSLog(@"setPlace %@", place);
     _place = place;
+    [self updatePhotos];
+    [self updateDetailVC];
     //[self.tableView reloadData];
+}
+
+- (NSArray *)mapAnnotations {
+    NSMutableArray *annotations = [[NSMutableArray alloc] initWithCapacity:[self.photos count]];
+    for (NSDictionary *photo in self.photos) {
+        mapAnnotation *annotation = [mapAnnotation annotationForPlaceAndPhoto:photo];
+        [annotations addObject:annotation];
+    }
+    return annotations;
+}
+
+- (UIImage *)mapViewController:(mapViewController *)mapVC imageForAnnotation:(id<MKAnnotation>)annotation {
+    mapAnnotation *anno = (mapAnnotation *)annotation;
+    NSURL *imgURL = [FlickrFetcher urlForPhoto:anno.data format:FlickrPhotoFormatSquare];
+    NSData *imgData = [NSData dataWithContentsOfURL:imgURL];
+    return imgData ? [UIImage imageWithData:imgData] : nil;
 }
 
 #pragma mark - Table view data source

@@ -31,6 +31,11 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 - (IBAction)refresh:(UIBarButtonItem *)sender {
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner startAnimating];
@@ -49,24 +54,32 @@
     });
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setTopPlaces:(NSArray *)topPlaces {
+    _topPlaces = topPlaces;
+    [self updateDetailVC];
+    [self.tableView reloadData];
+}
+
+- (NSArray *)topPlaces {
+    if (!_topPlaces) {
+        _topPlaces = [NSArray array];
+    }
+    return _topPlaces;
 }
 
 - (NSArray *)mapAnnotations {
     NSMutableArray *annotations = [[NSMutableArray alloc] initWithCapacity:[self.topPlaces count]];
     for (NSDictionary *place in self.topPlaces) {
-        [annotations addObject:[mapAnnotation annotationForPhoto:place]];
+        [annotations addObject:[mapAnnotation annotationForPlaceAndPhoto:place]];
     }
     return annotations;
 }
 
 - (UIImage *)mapViewController:(mapViewController *)mapVC imageForAnnotation:(id<MKAnnotation>)annotation {
     mapAnnotation *anno = (mapAnnotation *) annotation;
-    NSURL *url = [FlickrFetcher urlForPhoto:anno.photo format:FlickrPhotoFormatSquare];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    return data ? [UIImage imageWithData:data] : nil;
+    NSURL *url = [FlickrFetcher urlForPhoto:anno.data format:FlickrPhotoFormatSquare];
+    NSData *imgData = [NSData dataWithContentsOfURL:url];
+    return imgData ? [UIImage imageWithData:imgData] : nil;
 }
 
 - (void)updateDetailVC {
@@ -80,19 +93,6 @@
             [(mapViewController *)mapVC setAnnotations:[self mapAnnotations]];
         }
     }
-}
-
-- (void)setTopPlaces:(NSArray *)topPlaces {
-    _topPlaces = topPlaces;
-    [self updateDetailVC];
-    [self.tableView reloadData];
-}
-
-- (NSArray *)topPlaces {
-    if (!_topPlaces) {
-        _topPlaces = [NSArray array];
-    }
-    return _topPlaces;
 }
 
 #pragma mark - Table view data source

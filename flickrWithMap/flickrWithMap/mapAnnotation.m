@@ -11,28 +11,28 @@
 
 @implementation mapAnnotation
 
-@synthesize photo = _photo;
+@synthesize data = _data;
 
-+ (mapAnnotation *)annotationForPhoto:(NSDictionary *)photo {
++ (mapAnnotation *)annotationForPlaceAndPhoto:(NSDictionary *)data {
     mapAnnotation *annotation = [[mapAnnotation alloc] init];
-    annotation.photo = photo;
+    annotation.data = data;
     return annotation;
 }
 
 - (NSString *)title {
-    NSString *title = [self.photo objectForKey:FLICKR_PHOTO_TITLE];
-    NSString *cityName = [self.photo objectForKey:FLICKR_CITYNAME];
+    NSString *title = [self.data objectForKey:FLICKR_PHOTO_TITLE];
+    NSString *cityName = [self.data objectForKey:FLICKR_CITYNAME];
     return title ? title : cityName;
 }
 
 - (NSString *)subtitle {
-    return [self.photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
+    return [self.data valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
 }
 
 - (CLLocationCoordinate2D) coordinate {
     CLLocationCoordinate2D coordinate;
-    coordinate.latitude = [[self.photo objectForKey:FLICKR_LATITUDE] doubleValue];
-    coordinate.longitude = [[self.photo objectForKey:FLICKR_LONGITUDE] doubleValue];
+    coordinate.latitude = [[self.data objectForKey:FLICKR_LATITUDE] doubleValue];
+    coordinate.longitude = [[self.data objectForKey:FLICKR_LONGITUDE] doubleValue];
     return coordinate;
 }
 

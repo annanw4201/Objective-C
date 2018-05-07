@@ -27,6 +27,11 @@
     //[self updateImage];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 - (void)setPhoto:(NSDictionary *)photo {
     _photo = photo;
     [self.navigationItem setTitle:[self.photo objectForKey:FLICKR_PHOTO_TITLE]];
@@ -54,11 +59,6 @@
     CGFloat minScale = wholePhotoWidthScale > wholePhotoHeightScale ? wholePhotoHeightScale : wholePhotoWidthScale;
     [self.imageScrollView setZoomScale:minScale];
     //NSLog(@"min image scroll %f", self.imageScrollView.zoomScale);
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
