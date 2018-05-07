@@ -12,6 +12,7 @@
 #import "mapAnnotation.h"
 #import "photosInSelectedPlaceTableViewController.h"
 #import "topPlacesTableViewController.h"
+#import "FlickrFetcher.h"
 
 @interface mapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -94,15 +95,22 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     NSLog(@"callout tapped");
     id tabVC = [[self.splitViewController viewControllers] firstObject];
+    mapAnnotation *anno = view.annotation;
     if ([tabVC isKindOfClass:[UITabBarController class]]) {
         id firstNavigationVC = [[(UITabBarController *)tabVC viewControllers] firstObject];
         id topVC = [firstNavigationVC topViewController];
         if ([topVC isKindOfClass:[topPlacesTableViewController class]]) {
-            mapAnnotation *anno = view.annotation;
             [(topPlacesTableViewController *)topVC performSegueWithIdentifier:@"showPhotosInSelectedPlace" sender:anno.data];
         }
         else if ([topVC isKindOfClass:[photosInSelectedPlaceTableViewController class]]) {
-            mapAnnotation *anno = view.annotation;
+            [self performSegueWithIdentifier:@"showPhotoImage" sender:anno.data];
+        }
+    }
+    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        if ([self.delegate segueFromPlace] == YES) {
+            [self performSegueWithIdentifier:@"showPhotosInSelectedPlace" sender:anno.data];
+        }
+        else if ([self.delegate segueFromPhotos] == YES) {
             [self performSegueWithIdentifier:@"showPhotoImage" sender:anno.data];
         }
     }
@@ -118,14 +126,15 @@
         if ([sender isKindOfClass:[NSDictionary class]]) {
             NSDictionary *photo = sender;
             [segue.destinationViewController setPhoto:photo];
+            [segue.destinationViewController setTitle:[photo objectForKey:FLICKR_PHOTO_TITLE]];
         }
     }
-    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad &&
-             [segue.identifier isEqualToString:@"showPhotosInSelectedPlace"]) {
+    else if ([segue.identifier isEqualToString:@"showPhotosInSelectedPlace"]) {
         if ([sender isKindOfClass:[NSDictionary class]]) {
             NSLog(@"show photos in that place");
             NSDictionary *photoPlace = sender;
             [segue.destinationViewController setPlace: photoPlace];
+            [segue.destinationViewController setTitle:[photoPlace objectForKey:FLICKR_CITYNAME]];
         }
     }
 }

@@ -20,15 +20,20 @@
 @synthesize topPlaces = _topPlaces;
 
 - (void)viewDidLoad {
+    NSLog(@"view did load");
     [super viewDidLoad];
-    //NSLog(@"view did load");
-    [self refresh:self.navigationItem.leftBarButtonItem];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"view will appear");
+    [super viewWillAppear:YES];
+    [self refresh:self.navigationItem.leftBarButtonItem];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,6 +98,14 @@
             [(mapViewController *)mapVC setAnnotations:[self mapAnnotations]];
         }
     }
+}
+
+- (BOOL)segueFromPlace {
+    return YES;
+}
+
+- (BOOL)segueFromPhotos {
+    return NO;
 }
 
 #pragma mark - Table view data source
@@ -169,6 +182,12 @@
             [segue.destinationViewController setTitle:[place objectForKey:FLICKR_CITYNAME]];
         }
     }
+    else if ([segue.identifier isEqualToString:@"showMap"]) {
+        [segue.destinationViewController setDelegate: self];
+        [segue.destinationViewController setAnnotations:[self mapAnnotations]];
+    }
 }
 
 @end
+
+

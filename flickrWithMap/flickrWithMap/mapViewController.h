@@ -13,6 +13,8 @@
 
 @protocol mapViewControllerDelegate <NSObject>
 - (UIImage *)mapViewController: (mapViewController *)mapVC imageForAnnotation:(id <MKAnnotation>)annotation;
+@optional - (BOOL)segueFromPlace;
+@optional - (BOOL)segueFromPhotos;
 @end
 
 @interface mapViewController : UIViewController

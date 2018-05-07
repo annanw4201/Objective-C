@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OKz-2Y-2bY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OKz-2Y-2bY">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,7 +14,6 @@
         <scene sceneID="LEt-4o-uJc">
             <objects>
                 <tabBarController id="OKz-2Y-2bY" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="rna-0i-Bgu"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="neE-nH-cSW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -75,7 +74,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvM-g0-Zhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1412" y="597"/>
+            <point key="canvasLocation" x="2105" y="768"/>
         </scene>
         <!--Top Places Table View Controller-->
         <scene sceneID="5OR-yU-jF7">
@@ -123,16 +122,21 @@
                                 <action selector="refresh:" destination="YhJ-Qu-iiF" id="xVy-Xe-njU"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="844-VU-48J">
+                            <connections>
+                                <segue destination="NMw-7z-SAI" kind="show" identifier="showMap" id="kta-px-SgA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="s2B-9z-3V5" kind="show" identifier="showPhotosInSelectedPlace" id="y1y-3d-edw"/>
+                        <segue destination="s2B-9z-3V5" kind="show" identifier="showPhotosInSelectedPlace" id="nuf-fM-bzo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgq-Px-Pmo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1390" y="-197"/>
+            <point key="canvasLocation" x="2106" y="-505"/>
         </scene>
-        <!--Photos In Selected Place Table View Controller-->
+        <!--Title-->
         <scene sceneID="PFu-zo-jpl">
             <objects>
                 <tableViewController id="s2B-9z-3V5" customClass="photosInSelectedPlaceTableViewController" sceneMemberID="viewController">
@@ -171,13 +175,46 @@
                             <outlet property="delegate" destination="s2B-9z-3V5" id="Toq-D6-N8m"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="FCx-Zu-MVy">
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="n87-1d-RFe">
+                            <connections>
+                                <segue destination="NMw-7z-SAI" kind="show" identifier="showMap" id="4Be-FK-sWZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="Wm4-At-KcH" kind="show" identifier="showPhotoImage" id="knU-aM-Pyb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQ1-1A-cK1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1500" y="-235"/>
+            <point key="canvasLocation" x="3617" y="-505"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="TyN-Tg-61u">
+            <objects>
+                <viewController id="NMw-7z-SAI" customClass="mapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c4h-HA-3lm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Rnn-3I-lhE">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="0bf-Qe-7ln"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="Rnn-3I-lhE" id="Otz-nQ-uiu"/>
+                        <segue destination="Wm4-At-KcH" kind="show" identifier="showPhotoImage" id="HD3-IJ-3QR"/>
+                        <segue destination="s2B-9z-3V5" kind="show" identifier="showPhotosInSelectedPlace" id="0Q1-le-5Cm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qKg-c8-ufK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2829.5999999999999" y="273.91304347826087"/>
         </scene>
         <!--Photo Image View Controller-->
         <scene sceneID="Kjk-zW-F3s">
@@ -208,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZN-qt-j8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2283.5082458770617" y="-53.600000000000001"/>
+            <point key="canvasLocation" x="3617" y="768"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hif-Rf-BsH">
@@ -219,13 +256,16 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NB4-JP-QND">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="YhJ-Qu-iiF" kind="relationship" relationship="rootViewController" id="8N2-UQ-z3M"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1eZ-EY-aAA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="-159"/>
+            <point key="canvasLocation" x="1300" y="-505"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ck2-vp-8ms">
@@ -244,10 +284,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oH0-IX-kSv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1299.2" y="560.41979010494754"/>
+            <point key="canvasLocation" x="1300" y="768"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="knU-aM-Pyb"/>
+        <segue reference="HD3-IJ-3QR"/>
+        <segue reference="4Be-FK-sWZ"/>
+        <segue reference="0Q1-le-5Cm"/>
     </inferredMetricsTieBreakers>
 </document>

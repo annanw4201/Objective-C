@@ -13,7 +13,7 @@
 #import "mapViewController.h"
 
 @interface recentViewedTableViewController ()
-@property (nonatomic, weak) NSArray *photos;
+@property (nonatomic, strong) NSArray *photos;
 @end
 
 @implementation recentViewedTableViewController

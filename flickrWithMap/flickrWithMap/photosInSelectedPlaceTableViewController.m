@@ -30,7 +30,6 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,6 +39,7 @@
 
 - (void)updatePhotos {
     if (self.place) {
+        UIBarButtonItem *right = self.navigationItem.rightBarButtonItem;
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [spinner startAnimating];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
@@ -48,7 +48,7 @@
         dispatch_async(downloadQueue, ^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.photos = [FlickrFetcher photosInPlace:self.place maxResults:maxPhotos];
-                self.navigationItem.rightBarButtonItem = NULL;
+                self.navigationItem.rightBarButtonItem = right;
             });
         });
     }
@@ -94,6 +94,14 @@
     NSURL *imgURL = [FlickrFetcher urlForPhoto:anno.data format:FlickrPhotoFormatSquare];
     NSData *imgData = [NSData dataWithContentsOfURL:imgURL];
     return imgData ? [UIImage imageWithData:imgData] : nil;
+}
+
+- (BOOL)segueFromPhotos {
+    return YES;
+}
+
+- (BOOL)segueFromPlace {
+    return NO;
 }
 
 #pragma mark - Table view data source
@@ -192,6 +200,10 @@
             [segue.destinationViewController setPhoto:photo];
             //[segue.destinationViewController setTitle:[cell.textLabel text]];
         }
+    }
+    if ([segue.identifier isEqualToString:@"showMap"]) {
+        [segue.destinationViewController setDelegate:self];
+        [segue.destinationViewController setAnnotations:[self mapAnnotations]];
     }
 }
 
