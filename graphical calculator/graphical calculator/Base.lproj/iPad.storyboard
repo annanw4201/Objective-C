@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xy8-C3-I8A">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xy8-C3-I8A">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -284,7 +284,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zU6-GW-IiU" customClass="GraphView">
-                                <rect key="frame" x="20" y="64" width="728" height="916"/>
+                                <rect key="frame" x="0.0" y="64" width="748" height="916"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMa-Pg-GIz">
@@ -310,9 +310,8 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="graphView" destination="zU6-GW-IiU" id="Kj6-J2-ToW"/>
-                        <outlet property="toolBar" destination="OBw-99-ufd" id="Z3C-ga-xYL"/>
-                        <outlet property="view" destination="zU6-GW-IiU" id="uus-8E-bI9"/>
+                        <outlet property="graphView" destination="zU6-GW-IiU" id="PBg-ND-bkP"/>
+                        <outlet property="toolBar" destination="OBw-99-ufd" id="fDE-5d-Zga"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DoV-Y8-WVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -322,7 +321,7 @@
         <!--Favorite Graph Table View Controller-->
         <scene sceneID="pgp-ae-g1A">
             <objects>
-                <tableViewController storyboardIdentifier="favoriteGraphTableVC" modalPresentationStyle="currentContext" id="QY3-F0-jJ5" customClass="favoriteGraphTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ipadFavoriteGraphTableVC" modalPresentationStyle="currentContext" id="QY3-F0-jJ5" customClass="favoriteGraphTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7Vs-ps-iLO">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

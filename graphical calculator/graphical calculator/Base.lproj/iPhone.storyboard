@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ijq-5l-nry">
-    <device id="retina5_5" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ijq-5l-nry">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wqn-Yu-dvZ">
@@ -229,6 +229,7 @@
                                 <state key="normal" title="Graph"/>
                                 <connections>
                                     <action selector="graphPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tMv-B3-DcY"/>
+                                    <segue destination="YR2-uu-uWP" kind="show" identifier="showGraph" id="c0Z-25-UIz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -240,39 +241,89 @@
                         <outlet property="expressionDisplay" destination="6y9-46-UQZ" id="FJd-aC-Dcg"/>
                         <outlet property="resultDisplay" destination="EAw-3y-uYz" id="GQU-2m-ljD"/>
                         <outlet property="variableDisplay" destination="avr-7E-uWi" id="ZaJ-Cg-PKF"/>
-                        <segue destination="Z6S-Tb-NcQ" kind="show" identifier="showGraph" id="G9y-hK-y3R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="456.80000000000001" y="117.39130434782609"/>
         </scene>
-        <!--Graph-->
-        <scene sceneID="sMp-fh-p6L">
+        <!--Title-->
+        <scene sceneID="psY-HE-Cfo">
             <objects>
-                <viewController id="Z6S-Tb-NcQ" customClass="GraphViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="uPj-Qq-UZc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                <viewController id="YR2-uu-uWP" customClass="GraphViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xer-qM-ART">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l2F-Jd-ToW" customClass="GraphView">
-                                <rect key="frame" x="16" y="64" width="343" height="583"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Is-pK-HSv" customClass="GraphView">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IY2-ar-8Yg" customClass="GraphView">
+                                        <rect key="frame" x="0.0" y="0.0" width="378" height="605"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5i-Kh-zva">
+                                                <rect key="frame" x="255" y="560" width="115" height="37"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Add To Favorite"/>
+                                                <connections>
+                                                    <action selector="addToFavoritePressed:" destination="YR2-uu-uWP" eventType="touchUpInside" id="tsr-Bf-XuQ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="sTY-uR-QFW"/>
+                        <viewLayoutGuide key="safeArea" id="Ear-Hd-vRk"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Graph" id="XMt-w8-rJH"/>
+                    <navigationItem key="navigationItem" title="Title" id="WZO-Jy-dhp">
+                        <barButtonItem key="rightBarButtonItem" title="Favorite" id="wKe-Vq-RiO">
+                            <connections>
+                                <action selector="favPressed:" destination="YR2-uu-uWP" id="LjF-jn-irS"/>
+                                <segue destination="vnu-Kl-dPy" kind="show" identifier="showFavorite" id="OMW-qi-eK4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="graphView" destination="l2F-Jd-ToW" id="3Bg-dI-MaL"/>
-                        <outlet property="view" destination="l2F-Jd-ToW" id="yjv-hj-SNc"/>
+                        <outlet property="graphView" destination="IY2-ar-8Yg" id="5y4-0E-FZ1"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WSY-2q-2gX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h5Y-Us-8Ci" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1226.4000000000001" y="116.49175412293854"/>
+            <point key="canvasLocation" x="1469.5999999999999" y="116.49175412293854"/>
+        </scene>
+        <!--Favorite Graph Table View Controller-->
+        <scene sceneID="8LH-8w-yHs">
+            <objects>
+                <tableViewController id="vnu-Kl-dPy" customClass="favoriteGraphTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IRM-xK-AJW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="programCell" id="W0g-x9-P71">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W0g-x9-P71" id="nlM-62-jFv">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vnu-Kl-dPy" id="B5y-fp-FAt"/>
+                            <outlet property="delegate" destination="vnu-Kl-dPy" id="fbz-eK-SUO"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p3L-iT-awE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2270" y="117"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="efL-n2-AUl">
@@ -280,7 +331,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ijq-5l-nry" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="k5h-lk-UK5">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

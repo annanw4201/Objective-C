@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol splitViewBarButtonItemPresenter <NSObject>
-@property (nonatomic, strong) UIBarButtonItem *navigationItem;
+@property (nonatomic, strong) UIBarButtonItem *leftNavigationItem;
 @property (nonatomic, strong) UIBarButtonItem *formulaBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *favoriteBarButtonItem;
 @end

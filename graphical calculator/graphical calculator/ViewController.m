@@ -157,12 +157,6 @@
     }
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showGraph"]) {
-        [segue.destinationViewController setProgram:self.brain.program];
-    }
-}
-
 - (IBAction)graphPressed:(UIButton *)sender {
     id theDetailView = [self detailView];
     if (self.enteringNumber || self.enteringVariable || self.enteringFloatingNumber) {
@@ -172,16 +166,18 @@
         NSLog(@"show detail");
         [theDetailView setProgram:self.brain.program];
     }
-    else {
-        NSLog(@"iphone");
-        [self performSegueWithIdentifier:@"showGraph" sender:self];
-    }
 }
 
 - (GraphViewController *)detailView {
     id dvc = [self.splitViewController.viewControllers lastObject];
     if (![dvc isKindOfClass:[GraphViewController class]]) dvc = nil;
     return dvc;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showGraph"]) {
+        [segue.destinationViewController setProgram:self.brain.program];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

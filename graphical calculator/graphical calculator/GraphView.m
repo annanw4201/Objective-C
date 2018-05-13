@@ -10,11 +10,11 @@
 #import "../AxesDrawer/AxesDrawer.h"
 
 @implementation GraphView
-@synthesize data = _data;
+@synthesize delegate = _delegate;
 
 - (void)pinch:(UIPinchGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateChanged || gesture.state == UIGestureRecognizerStateEnded) {
-        self.data.scale *= gesture.scale;
+        self.delegate.scale *= gesture.scale;
         gesture.scale = 1;
     }
 }
@@ -22,27 +22,27 @@
 - (void)pan:(UIPanGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateChanged || gesture.state == UIGestureRecognizerStateEnded) {
         CGPoint translation = [gesture translationInView:self];
-        translation.x += self.data.origin.x;
-        translation.y += self.data.origin.y;
-        self.data.origin = translation;
+        translation.x += self.delegate.origin.x;
+        translation.y += self.delegate.origin.y;
+        self.delegate.origin = translation;
         [gesture setTranslation:CGPointZero inView:self];
     }
 }
 
 - (void)setUp {
-    NSLog(@"setup");
+    NSLog(@"graphview setup");
     self.contentMode = UIViewContentModeRedraw;
 }
 
 - (id)initWithFrame:(CGRect)frame {
-    NSLog(@"init frame");
+    NSLog(@"graphview init frame");
     self = [super initWithFrame:frame];
     if (self) [self setUp];
     return self;
 }
 
 - (void)awakeFromNib {
-    NSLog(@"awake");
+    NSLog(@"graph view awake");
     [super awakeFromNib];
     [self setUp];
 }
@@ -59,8 +59,8 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    CGPoint origin = self.data.origin;
-    CGFloat scale = self.data.scale;
+    CGPoint origin = self.delegate.origin;
+    CGFloat scale = self.delegate.scale;
     
     [AxesDrawer drawAxesInRect:rect originAtPoint:origin scale:scale];
     
@@ -70,7 +70,7 @@
     [[UIColor redColor] setFill];
     CGFloat widthPixels = rect.size.width;
     for (CGFloat xPixel = 0.0f; xPixel < widthPixels; xPixel += 1 / self.contentScaleFactor) {
-        double yValue = [self.data yValueOfx:[self xPixelToPoint:xPixel withOrigin:origin usingScale:scale]];
+        double yValue = [self.delegate yValueOfx:[self xPixelToPoint:xPixel withOrigin:origin usingScale:scale]];
         CGFloat yPixel = [self yPointToPixel:yValue withOrigin:origin usingScale:scale];
         //NSLog(@"x and y: %f, %f", [self xPixelToPoint:xPixel withOrigin:origin usingScale:scale], yPixel);
         CGContextFillRect(context, CGRectMake(xPixel, yPixel, 1.0, 1.0));
