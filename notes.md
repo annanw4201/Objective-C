@@ -33,3 +33,4 @@
 - In IPad mode, we can get split view controllers, and then choose which view controller you want to operate on.
 - When use callout in MapKit, make sure the title is not nil, otherwise, it will not show up.
 - When using multithreaded tasks, be sure the data is ready and are returned in main UI thread, otherwise the data is nil before it's ready to be used.
+- always check if some namings are system defaults, otherwise will likely override the system default components and cause nil problem.
