@@ -1,3 +1,4 @@
+.DS_Store
 
 # Created by https://www.gitignore.io/api/xcode
 
@@ -34,3 +35,4 @@ xcuserdata/
 /*.gcno
 
 # End of https://www.gitignore.io/api/xcode
+
